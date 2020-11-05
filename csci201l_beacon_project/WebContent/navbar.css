@@ -1,0 +1,52 @@
+
+.user {
+	color: white;
+	padding: 5px;
+	border: 1px solid transparent;
+	border-radius: 5px;
+
+	position: relative;
+}
+
+.user:hover {
+	border: 1px solid white;
+}
+
+.user__user-dropdown {
+	background-color: white;
+	border: 1px solid black;
+	border-radius: 5px;
+	width: 150px;
+	text-align: center;
+	
+	position: absolute;
+	right: -10px;
+}
+
+.user-dropdown__btn {
+	width: 100%;
+	background-color: white;
+}
+
+.user-dropdown__btn:hover {
+	background: lightgray;
+}
+
+.user__user-dropdown--logged-in {
+	display: none;
+}
+
+.user-dropdown__username {
+	margin: 10px;
+	color: black;
+}
+
+.user__user-dropdown--logged-out {
+	display: none;
+}
+
+@media (min-width: 768px) {
+	#searchbar-id {
+		width: 500px;
+	}
+}
