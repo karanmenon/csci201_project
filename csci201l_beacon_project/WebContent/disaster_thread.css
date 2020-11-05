@@ -78,22 +78,42 @@
 .modal-content {
 	width: 100%;
   	background-color: white;
-  	align-items: center;
   	padding: 10px;
+  	display: flex;
+  	flex-direction: column;
 }
 
 #modal-content__header {
 	font-size: 20px;
 	margin-bottom: 10px;
+	text-align: center;
 }
 
-#thread-input-id {
+#post-title-input-id {
 	margin-bottom: 10px;
 }
 
-#form__categories-id {
-	margin-bottom: 20px;
+.post-location-input {
+	display: flex;
+	flex-direction: row;
+	margin-bottom: 10px;
 }
+
+#post-city-input-id {
+	margin-right: 5px;
+}
+
+#post-state-input-id {
+	margin-left: 5px;
+}
+
+#post-info-input-id {
+	width: 100%;
+	height: 300px;
+	resize: none;
+	margin-bottom: 10px;
+}
+
 
 @media (min-width: 768px) {
 	.content-header {

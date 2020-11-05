@@ -114,21 +114,20 @@
 		<!-- Modal content -->
 		
 		<div class="modal-content">
-			<div id="modal-content__header">Create New Disaster Thread</div>
-			<input class="form-control" type="text" id="thread-input-id" placeholder="Thread Title">
-			<div>
-				<label id="category-label-id" for="form__categories-id">Category:</label>
-				<select name="categories" id="form__categories-id">
-	                <option value="Fire">Fire</option>
-	                <option value="Earthquake">Earthquake</option>
-	                <option value="Tornado">Tornado</option>
-	                <option value="Hurricane">Hurricane</option>
-	            </select>
-            </div>
-            <div class="modal-content__buttons">
-            	<button id="submit-btn-id" class="btn btn-primary">Submit</button>
-            	<button id="discard-btn-id" class="btn btn-secondary">Discard</button>
-            </div>      
+			<div id="modal-content__header">Create New Post</div>
+			<form id="post-form-id">
+				<input class="form-control" type="text" id="post-title-input-id" placeholder="Title/Description">
+				<div class="post-location-input">
+					<input class="form-control" type="text" id="post-city-input-id" placeholder="City">
+					<input class="form-control" type="text" id="post-state-input-id" placeholder="State">
+				</div>
+				<textarea class="form-control" id="post-info-input-id" placeholder="Info"></textarea>
+
+	            <div class="modal-content__buttons">
+	            	<button id="submit-btn-id" class="btn btn-primary">Submit</button>
+	            	<button id="discard-btn-id" class="btn btn-secondary">Discard</button>
+	            </div>    
+	        </form>  
 		</div>
 	
 	</div>
