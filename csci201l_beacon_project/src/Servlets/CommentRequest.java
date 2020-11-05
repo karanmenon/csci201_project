@@ -1,5 +1,7 @@
 package Servlets;
 
-public class CommentRequest {
+import javax.servlet.http.HttpServlet;
+
+public class CommentRequest extends HttpServlet {
 
 }

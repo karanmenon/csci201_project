@@ -1,5 +1,6 @@
 package Servlets;
+import javax.servlet.http.HttpServlet;
 
-public class UserRequest {
+public class UserRequest extends HttpServlet {
 
 }

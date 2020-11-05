@@ -1,6 +1,7 @@
 package Servlets;
+import javax.servlet.http.HttpServlet;
 
-public class SubBeaconRequest {
+public class SubBeaconRequest extends HttpServlet{
 	
 
 }
