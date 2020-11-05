@@ -1,5 +1,5 @@
-/* Content Modifiers */
-.content-modifiers {
+/* Content Header */
+.content-header {
 	display: flex;
 	align-items: baseline;
 	padding: 5px;
@@ -84,7 +84,7 @@
 }
 
 @media (min-width: 768px) {
-	.content-modifiers {
+	.content-header {
 		margin: auto;
 		width: 70%;
 	}
@@ -100,7 +100,7 @@
 }
 
 @media (min-width: 992px) {
-	.content-modifiers {
+	.content-header {
 		margin: auto;
 		width: 60%;
 	}
