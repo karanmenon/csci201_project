@@ -75,12 +75,25 @@
 	margin-bottom: 10px;
 }
 
+#thread-form-id {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
 #thread-input-id {
 	margin-bottom: 10px;
 }
 
 #form__categories-id {
 	margin-bottom: 20px;
+}
+
+.has-error > .selectpicker {
+    border-color: #a94442;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
 }
 
 @media (min-width: 768px) {

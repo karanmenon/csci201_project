@@ -103,20 +103,23 @@
 		
 		<div class="modal-content">
 			<div id="modal-content__header">Create New Disaster Thread</div>
-			<input class="form-control" type="text" id="thread-input-id" placeholder="Thread Title">
-			<div>
-				<label id="category-label-id" for="form__categories-id">Category:</label>
-				<select name="categories" id="form__categories-id">
-	                <option value="Fire">Fire</option>
-	                <option value="Earthquake">Earthquake</option>
-	                <option value="Tornado">Tornado</option>
-	                <option value="Hurricane">Hurricane</option>
-	            </select>
-            </div>
-            <div class="modal-content__buttons">
-            	<button id="submit-btn-id" class="btn btn-primary">Submit</button>
-            	<button id="discard-btn-id" class="btn btn-secondary">Discard</button>
-            </div>      
+			<form id="thread-form-id">
+				<input class="form-control" type="text" id="thread-input-id" placeholder="Thread Title">
+				<div>
+					<label id="category-label-id" for="form__categories-id">Category:</label>
+					<select name="categories" id="form__categories-id">
+						<option value="" selected disabled>-- Select--</option>
+		                <option value="Fire">Fire</option>
+		                <option value="Earthquake">Earthquake</option>
+		                <option value="Tornado">Tornado</option>
+		                <option value="Hurricane">Hurricane</option>
+		            </select>
+	            </div>
+	            <div class="modal-content__buttons">
+	            	<button type="submit" id="submit-btn-id" class="btn btn-primary">Submit</button>
+	            	<button type="button" id="discard-btn-id" class="btn btn-secondary">Discard</button>
+	            </div>      
+	        </form>
 		</div>
 	
 	</div>
