@@ -8,6 +8,14 @@ public class DatabaseDriver {
 		
 	}
 	
+	public User getUser(String username, String password) {
+		
+	}
+	
+	public boolean isValidUser(Integer userID) {
+		
+	}
+	
 	public BeaconSignal getSubBeacon(Integer disasterID) {
 		return null; 
 	}
