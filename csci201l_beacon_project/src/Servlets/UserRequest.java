@@ -43,7 +43,5 @@ public class UserRequest extends HttpServlet
 			request.setAttribute("user", user); 
 			request.getRequestDispatcher("/homepage.jsp").forward(request, response); 
 		}
-	
-
 	}
 }
