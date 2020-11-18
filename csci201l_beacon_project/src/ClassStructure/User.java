@@ -2,31 +2,29 @@ package ClassStructure;
 
 public class User {
 	
-	private Integer id; 
 	private String username; 
 	private String password; 
-	private String name; 
+	private String email; 
 	
-	public User(Integer id, String user, String pass, String name) 
+	public User(String user, String pass, String email) 
 	{
-		this.id = id; 
 		username = user; 
 		password = pass; 
-		this.name = name; 
-	}
-	
-	public Integer get_id() { 
-		return id; 
+		this.email = email; 
 	}
 	
 	public String get_username() {
 		return username; 
 	}
 	
-	public String get_name() {
-		return name; 
+	public String get_password() {
+		return password;
 	}
 	
-
+	public String get_email() {
+		return email; 
+	}
+	
+	
 
 }

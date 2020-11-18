@@ -5,10 +5,10 @@ import java.time.LocalDate;
 public class Comment {
 	
 	private String body; 
-	private User userId; 
+	private String userId; 
 	private LocalDate timestamp; 
 	
-	public Comment(String bod, User id, LocalDate time)
+	public Comment(String bod, String id, LocalDate time)
 	{
 		body = bod; 
 		userId = id; 
@@ -20,7 +20,7 @@ public class Comment {
 		return body; 
 	}
 	
-	public User get_userId() 
+	public String get_userId() 
 	{
 		return userId; 
 	}
