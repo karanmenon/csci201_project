@@ -1,22 +1,22 @@
 package ClassStructure;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class BeaconSignal {
 	
-	private User userId; 
-	private SubBeacon subBeaconName; 
+	private Integer userId; 
+	private SubBeacon subBeacon; 
 	private String postTitle; 
 	private String postBody; 
-	private LocalDate timestamp;
+	private LocalDateTime timestamp;
 	private ArrayList<Comment> comments; 
 	
-	public BeaconSignal(User user, SubBeacon beacon, String title, String body, 
-			LocalDate time, ArrayList<Comment> comms) 
+	public BeaconSignal(Integer id, SubBeacon beacon, String title, String body, 
+			LocalDateTime time, ArrayList<Comment> comms) 
 	{
-		userId = user; 
-		subBeaconName = beacon; 
+		userId = id; 
+		subBeacon = beacon; 
 		postTitle = title; 
 		postBody = body; 
 		timestamp = time; 
@@ -27,8 +27,8 @@ public class BeaconSignal {
 		return userId; 
 	}
 	
-	public SubBeacon get_subBeaconName() {
-		return subBeaconName; 
+	public SubBeacon get_subBeacon() {
+		return subBeacon; 
 	}
 	
 	public String get_postTitle() {
@@ -39,7 +39,7 @@ public class BeaconSignal {
 		return postBody; 
 	}
 	
-	public LocalDate get_timestamp() {
+	public LocalDateTime get_timestamp() {
 		return timestamp; 
 	}
 	

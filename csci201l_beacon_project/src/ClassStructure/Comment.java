@@ -1,18 +1,22 @@
-package ClassStructure;
-
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Comment {
 	
 	private String body; 
-	private String userId; 
-	private LocalDate timestamp; 
+	private Integer userId; 
+	private LocalDateTime timestamp; 
+	private BeaconSignal post;
 	
-	public Comment(String bod, String id, LocalDate time)
+	public Comment(String bod, Integer id, LocalDateTime time, BeaconSignal bpost)
 	{
 		body = bod; 
 		userId = id; 
 		timestamp = time; 
+		post = bpost;
+	}
+	
+	public BeaconSignal get_post() {
+		return post;
 	}
 	
 	public String get_body()
@@ -20,12 +24,12 @@ public class Comment {
 		return body; 
 	}
 	
-	public String get_userId() 
+	public Integer get_userId() 
 	{
 		return userId; 
 	}
 	
-	public LocalDate get_time() 
+	public LocalDateTime get_time() 
 	{
 		return timestamp; 
 	}
