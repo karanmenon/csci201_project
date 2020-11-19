@@ -3,6 +3,9 @@
 	display: flex;
 	align-items: baseline;
 	padding: 5px;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 650px;
 }
 
 #filters-form-id label{
@@ -18,20 +21,27 @@
 }
 
 /* Threads */
+.content {
+	width: 99%;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 650px;
+}
+
 .thread {
 	border: 2px solid lightgray;
 	padding: 20px;
-	margin: 2px;
+	margin-bottom: 2px;
 	border-radius: 5px;
 	display: flex;
 	align-items: center;
 }
 
 .thread:hover {
-	background: lightgray;
+	background-color: #9F9F9F21;
 }
 
-.thread__tag {
+.thread-tag {
 	box-sizing: border-box;
 	width: 20%;
 	text-align: center;
@@ -40,7 +50,7 @@
 	border-radius: 5px;
 }
 
-.thread__name {
+.thread-name {
 	box-sizing: border-box;
 	width: 80%;
 	text-align: center;
@@ -68,6 +78,7 @@
   	background-color: white;
   	align-items: center;
   	padding: 10px;
+  	max-width: 600px;
 }
 
 #modal-content__header {
@@ -97,33 +108,10 @@
 }
 
 @media (min-width: 768px) {
-	.content-header {
-		margin: auto;
-		width: 70%;
-	}
 
-	.content {
-		margin: auto;
-		width: 70%;
-	}
-
-	.modal-content {
-		width: 60%;
-	}
 }
 
 @media (min-width: 992px) {
-	.content-header {
-		margin: auto;
-		width: 60%;
-	}
 
-	.content {
-		margin: auto;
-		width: 60%;
-	}
-
-	.modal-content {
-		width: 50%;
-	}
 }
+
