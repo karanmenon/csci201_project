@@ -23,7 +23,7 @@ public class BeaconSignal {
 		comments = comms; 	
 	}
 	
-	public User get_userId() {
+	public Integer get_userId() {
 		return userId; 
 	}
 	

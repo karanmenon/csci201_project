@@ -1,5 +1,7 @@
 package ClassStructure; 
 
+import java.sql.*;
+
 public class DatabaseDriver {
 	
 	String serverConnection;
