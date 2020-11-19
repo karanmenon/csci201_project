@@ -115,18 +115,20 @@
 		
 		<div class="modal-content">
 			<div id="modal-content__header">Create New Post</div>
-			<form id="post-form-id">
+			<form id="post-form-id" action="" method="POST">
 				<input class="form-control" type="text" id="post-title-input-id" placeholder="Title/Description">
 				<div class="post-location-input">
 					<input class="form-control" type="text" id="post-city-input-id" placeholder="City">
 					<input class="form-control" type="text" id="post-state-input-id" placeholder="State">
 				</div>
 				<textarea class="form-control" id="post-info-input-id" placeholder="Info"></textarea>
-				<!--- NEED TO IMPLEMENT -->
-				<!-- add option to upload and display image -->
+				<div id="post-img-upload">
+					<label for="img">Upload image:</label>
+	  				<input type="file" id="post-img-input-id" name="img" accept="image/*">
+	  			</div>
 	            <div class="modal-content__buttons">
-	            	<button id="submit-btn-id" class="btn btn-primary">Submit</button>
-	            	<button id="discard-btn-id" class="btn btn-secondary">Discard</button>
+	            	<button type="submit" id="submit-btn-id" class="btn btn-primary">Submit</button>
+	            	<button type="button" id="discard-btn-id" class="btn btn-secondary">Discard</button>
 	            </div>    
 	        </form>  
 		</div>

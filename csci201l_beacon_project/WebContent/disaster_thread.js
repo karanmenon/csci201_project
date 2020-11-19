@@ -14,15 +14,15 @@ $(".modal-background").on("click", function(event) {
 // Close modal when discarded
 $("#discard-btn-id").on("click", function(event) {
 	$(".modal-background").css("display", "none");
-	$("#post-title-input-id").val("");
-	$("#post-city-input-id").val("");
-	$("#post-state-input-id").val("");
-	$("#post-info-input-id").val("");
+	$("#post-title-input-id").val("").removeClass("is-invalid");
+	$("#post-city-input-id").val("").removeClass("is-invalid");
+	$("#post-state-input-id").val("").removeClass("is-invalid");
+	$("#post-info-input-id").val("").removeClass("is-invalid");
+	$("#post-img-input-id").val("");
 });
 
 // Create new thread when submitted
 $("#post-form-id").on("submit", function(event) {
-	event.preventDefault();
 	var error = false;
 	// Check if input is empty
 	if ($("#post-title-input-id").val().trim() == "") {
@@ -42,10 +42,8 @@ $("#post-form-id").on("submit", function(event) {
 		error = true;
 	}
 	
-	if (!error) {
-		console.log(event);
-		console.log("New Post Submitted");
-		// NEED TO IMPLEMENT
+	if (error) {
+		event.preventDefault();
 	}
 
 });

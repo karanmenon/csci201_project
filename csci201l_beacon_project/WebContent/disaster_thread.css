@@ -114,6 +114,10 @@
 	margin-bottom: 10px;
 }
 
+#post-img-upload {
+	margin-bottom: 10px;
+}
+
 
 @media (min-width: 768px) {
 	.content-header {
