@@ -7,18 +7,23 @@ $("#report-btn-id").on("click", function(event) {
 $(".modal-background").on("click", function(event) {
 	if (event.target === this) {
 		$(this).css("display", "none");
-		$("#thread-input-id").val("");
+		resetModal();
 	}
 });
 
 // Close modal when discarded
 $("#discard-btn-id").on("click", function(event) {
 	$(".modal-background").css("display", "none");
+	resetModal();
+});
+
+// Function for resetting modal form
+function resetModal() {
 	$("#thread-input-id").val("");
 	$("#thread-input-id").removeClass("is-invalid");
 	$("#new-thread-categories option[value='']").prop("selected", true);
 	$("#new-thread-categories").css("border", "1px solid black");
-});
+}
 
 // Create new thread when submitted
 $("#thread-form-id").on("submit", function(event) {
@@ -39,7 +44,6 @@ $("#thread-form-id").on("submit", function(event) {
 	if (error) {
 		event.preventDefault();
 	}
-
 });
 
 // Remove warning after text is entered

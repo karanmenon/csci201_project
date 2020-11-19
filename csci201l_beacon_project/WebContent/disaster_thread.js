@@ -7,19 +7,25 @@ $("#report-btn-id").on("click", function(event) {
 $(".modal-background").on("click", function(event) {
 	if (event.target === this) {
 		$(this).css("display", "none");
-		$("#thread-input-id").val("");
+		resetModal();
 	}
 });
 
 // Close modal when discarded
 $("#discard-btn-id").on("click", function(event) {
 	$(".modal-background").css("display", "none");
+	resetModal();
+});
+
+
+// Function for resetting modal form
+function resetModal() {
 	$("#post-title-input-id").val("").removeClass("is-invalid");
 	$("#post-city-input-id").val("").removeClass("is-invalid");
 	$("#post-state-input-id").val("").removeClass("is-invalid");
 	$("#post-info-input-id").val("").removeClass("is-invalid");
 	$("#post-img-input-id").val("");
-});
+}
 
 // Create new thread when submitted
 $("#post-form-id").on("submit", function(event) {
