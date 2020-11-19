@@ -14,6 +14,8 @@ public class DatabaseDriver {
 		pwd = "root";
 	}
 	
+	// GET functions
+	
 	public User getUser(String username, String password) {
 		
 	}
@@ -29,6 +31,8 @@ public class DatabaseDriver {
 	public BeaconSignal getBeaconSignal(Integer postID) {
 		return null; 
 	}
+	
+	// ADD functions - timeStamps should be created for each object like this: LocalDateTime time = LocalDateTime.now();
 	
 	void addSubBeacon(SubBeacon subBeacon) { // new forum, like "Hurricane Sandy"
 		try(Connection connection = DriverManager.getConnection(db, user, pwd)){
@@ -55,16 +59,19 @@ public class DatabaseDriver {
 	void addBeaconSignal(BeaconSignal beaconSignal) { // new post, like "Yo, I need a place to stay with my family tonight"
 		try(Connection connection = DriverManager.getConnection(db, user, pwd)){
 			
+			// get the disasterID for the Forum (SubBeacon) where the post is being made
 			SubBeacon beacon = beaconSignal.get_subBeacon();
 			String sql1 = "SELECT disasterID FROM Disasters WHERE disasterName = '" + beacon.get_disaster() + "'";
 			PreparedStatement ps = connection.prepareStatement(sql1);
 			ResultSet rs = ps.executeQuery();
-			Integer disasterID;
-			while(rs.next()) {
-				disasterID = rs.getInt("disasterID"); // not sure if this is going to work
-			}
+			Integer disasterID = -1;
+			rs.next();
+			disasterID = rs.getInt("disasterID"); 
 
+			// initial post score
 			Integer postScore = 0;
+			
+			// insert new post into Posts table
 			String sql2 = "INSERT INTO Posts (disasterID, userID, postScore, timeStamps, postContent) VALUES ('" 
 					+ disasterID + "', '" + beaconSignal.get_userId() + "', '" + postScore + "', '" + beaconSignal.get_timestamp() + "', '" + beaconSignal.get_postBody() + "')";
 			Statement stmt = connection.createStatement();
@@ -80,15 +87,16 @@ public class DatabaseDriver {
 	void addComment(Comment comment) {
 		
 		try(Connection connection = DriverManager.getConnection(db, user, pwd)){
+			// get the postID for the post where the comment is being placed
 			BeaconSignal post = comment.get_post();
 			String sql1 = "SELECT postID FROM Posts WHERE postTitle = '" + post.get_postTitle() + "'";
 			PreparedStatement ps = connection.prepareStatement(sql1);
 			ResultSet rs = ps.executeQuery();
-			Integer post_id;
-			while(rs.next()) {
-				post_id = rs.getInt("postID"); // not sure if this is going to work
-			}
+			Integer post_id = -1;
+			rs.next();
+			post_id = rs.getInt("postID"); 
 			
+			// insert new comment into Comments table
 			String sql2 = "INSERT INTO Comments (userID, postID, commentContent, timeStamps) VALUES (" 
 					+ comment.get_userId() + ", " + post_id + ", '" + comment.get_body() + "', '" + comment.get_time() + "')";
 			Statement stmt = connection.createStatement();
