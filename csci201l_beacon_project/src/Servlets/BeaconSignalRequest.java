@@ -38,7 +38,7 @@ public class BeaconSignalRequest extends HttpServlet {
 		String postBody = request.getParameter("text_box"); 
 		// when User function working, will display
 		// User user = (User) request.getAttribute("user"); 
-		User FakeUser = new User("testingEmail", "testingName", "testingPass"); 
+		User FakeUser = new User("testingName", "testingPass"); 
 		String user = "Kiva"; // (String) request.getAttribute("user"); 
 		SubBeacon subBeacon = (SubBeacon) request.getAttribute("subBeacon"); 
 		LocalDate timeStamp = LocalDate.now();

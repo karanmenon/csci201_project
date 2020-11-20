@@ -9,9 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import test_project.ClassStructure.BeaconSignal;
-import test_project.ClassStructure.DatabaseDriver;
-import test_project.ClassStructure.SubBeacon;
+import ClassStructure.*;
+
 
 @WebServlet("/SubBeaconRequest")
 public class SubBeaconRequest extends HttpServlet{

@@ -17,11 +17,11 @@ public class DatabaseDriver {
 	// GET functions
 	
 	public User getUser(String username, String password) {
-		
+		return null; 
 	}
 	
 	public boolean isValidUser(Integer userID) {
-		
+		return true; 
 	}
 	
 	public BeaconSignal getSubBeacon(Integer disasterID) {
@@ -34,8 +34,8 @@ public class DatabaseDriver {
 	
 	// ADD functions - timeStamps should be created for each object like this: LocalDateTime time = LocalDateTime.now();
 	
-	void addSubBeacon(SubBeacon subBeacon) { // new forum, like "Hurricane Sandy"
-		try(Connection connection = DriverManager.getConnection(db, user, pwd)){
+	public void addSubBeacon(SubBeacon subBeacon) { // new forum, like "Hurricane Sandy"
+		try(Connection connection = DriverManager.getConnection(serverConnection, user, pwd)){
 			
 			String sql = "INSERT INTO Disasters (disasterName, disasterType) VALUES ('" 
 					+ subBeacon.get_disaster() + "', '" + subBeacon.get_tag() + "')";
@@ -56,8 +56,8 @@ public class DatabaseDriver {
 		}
 	}
 	
-	void addBeaconSignal(BeaconSignal beaconSignal) { // new post, like "Yo, I need a place to stay with my family tonight"
-		try(Connection connection = DriverManager.getConnection(db, user, pwd)){
+	public void addBeaconSignal(BeaconSignal beaconSignal) { // new post, like "Yo, I need a place to stay with my family tonight"
+		try(Connection connection = DriverManager.getConnection(serverConnection, user, pwd)){
 			
 			// get the disasterID for the Forum (SubBeacon) where the post is being made
 			SubBeacon beacon = beaconSignal.get_subBeacon();
@@ -84,9 +84,9 @@ public class DatabaseDriver {
 		
 	}
 	
-	void addComment(Comment comment) {
+	public void addComment(Comment comment) {
 		
-		try(Connection connection = DriverManager.getConnection(db, user, pwd)){
+		try(Connection connection = DriverManager.getConnection(serverConnection, user, pwd)){
 			// get the postID for the post where the comment is being placed
 			BeaconSignal post = comment.get_post();
 			String sql1 = "SELECT postID FROM Posts WHERE postTitle = '" + post.get_postTitle() + "'";
@@ -109,9 +109,9 @@ public class DatabaseDriver {
 		
 	}
 	
-	void addUser(User usr) {
+	public void addUser(User usr) {
 		
-		try(Connection connection = DriverManager.getConnection(db, user, pwd)){
+		try(Connection connection = DriverManager.getConnection(serverConnection, user, pwd)){
 			
 			String sql = "INSERT INTO Users (username, password, userPoints) VALUES ('" 
 						+ usr.get_username() + "', '" + usr.get_password() + "0)";

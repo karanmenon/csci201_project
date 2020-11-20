@@ -6,9 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import test_project.ClassStructure.DatabaseDriver;
-import test_project.ClassStructure.User;
+import ClassStructure.*;
 
 //validating user input
 @WebServlet("/UserRequest")
@@ -50,7 +48,7 @@ public class UserRequest extends HttpServlet
 			request.getRequestDispatcher("/login.jsp").include(request, response); 
 		}
 		else {
-			User user = db.getUser(email); 
+			User user = db.getUser(username,password); 
 			request.setAttribute("user", user); 
 			request.getRequestDispatcher("/homepage.jsp").forward(request, response); 
 		}
@@ -83,7 +81,7 @@ public class UserRequest extends HttpServlet
 			counter++; 
 		}
 		// user already exists, need to create a new 
-		if (db.getUser(email) != null) {
+		if (db.getUser(username, password) != null) {
 			error += "User already exists, please login to already existing account or create a new account"; 
 			counter++; 
 		}
@@ -92,7 +90,7 @@ public class UserRequest extends HttpServlet
 			request.getRequestDispatcher("/signup.jsp").include(request, response); 
 		}
 		else {
-			User user = new User(username, password, email); 
+			User user = new User(username, password); 
 			db.addUser(user);
 			
 			// for testing purposes, only sends the username, but will send the user object when working
