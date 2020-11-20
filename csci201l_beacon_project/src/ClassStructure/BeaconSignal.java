@@ -1,10 +1,11 @@
 package ClassStructure;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.util.*;
 
 public class BeaconSignal {
 	
+	private Integer postID; 
 	private Integer userId; 
 	private SubBeacon subBeacon; 
 	private String postTitle; 
@@ -21,6 +22,10 @@ public class BeaconSignal {
 		postBody = body; 
 		timestamp = time; 
 		comments = comms; 	
+	}
+	
+	public Integer get_postId() {
+		return postID; 
 	}
 	
 	public Integer get_userId() {
@@ -45,6 +50,10 @@ public class BeaconSignal {
 	
 	public ArrayList<Comment> get_comments() {
 		return comments; 
+	}
+	
+	public void set_postId(Integer id) {
+		postID = id; 
 	}
 
 }

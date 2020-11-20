@@ -45,7 +45,7 @@
 
 	<!-- Main Content -->
 	<div class="content-header">
-		<form class="form" id="filters-form-id">
+		<form class="form" id="filters-form-id" action="" method="POST">
 			<label id="category-label-id" for="form__categories-id">Category:</label>
             <select name="categories" id="form__categories-id">
                 <option value="All">All</option>
@@ -68,28 +68,28 @@
 	<div class="content">
 		<!-- PLACEHOLDER - Threads will be created dynamically -->
 		<div class="thread">
-			<div class="thread__tag">
+			<div class="thread-tag">
 				Category
 			</div>
-			<div class="thread__name">
+			<div class="thread-name">
 				Name of Disaster Thread
 			</div>
 		</div>
 
 		<div class="thread">
-			<div class="thread__tag">
+			<div class="thread-tag">
 				Category
 			</div>
-			<div class="thread__name">
+			<div class="thread-name">
 				Name of Disaster Thread
 			</div>
 		</div>
 
 		<div class="thread">
-			<div class="thread__tag">
+			<div class="thread-tag">
 				Category
 			</div>
-			<div class="thread__name">
+			<div class="thread-name">
 				Name of Disaster Thread
 			</div>
 		</div>
@@ -107,8 +107,8 @@
 				<input class="form-control" type="text" id="thread-input-id" placeholder="Thread Title">
 				<div>
 					<label id="category-label-id" for="form__categories-id">Category:</label>
-					<select name="categories" id="form__categories-id">
-						<option value="" selected disabled>-- Select--</option>
+					<select name="categories" id="new-thread-categories">
+						<option class="categories__default" value="" selected disabled>-- Select--</option>
 		                <option value="Fire">Fire</option>
 		                <option value="Earthquake">Earthquake</option>
 		                <option value="Tornado">Tornado</option>

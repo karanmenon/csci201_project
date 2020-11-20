@@ -7,39 +7,42 @@ $("#report-btn-id").on("click", function(event) {
 $(".modal-background").on("click", function(event) {
 	if (event.target === this) {
 		$(this).css("display", "none");
-		$("#thread-input-id").val("");
+		resetModal();
 	}
 });
 
 // Close modal when discarded
 $("#discard-btn-id").on("click", function(event) {
 	$(".modal-background").css("display", "none");
-	$("#thread-input-id").val("");
+	resetModal();
 });
+
+// Function for resetting modal form
+function resetModal() {
+	$("#thread-input-id").val("");
+	$("#thread-input-id").removeClass("is-invalid");
+	$("#new-thread-categories option[value='']").prop("selected", true);
+	$("#new-thread-categories").css("border", "1px solid black");
+}
 
 // Create new thread when submitted
 $("#thread-form-id").on("submit", function(event) {
-	event.preventDefault();
+	
 	var error = false;
 	// Check if input is empty
 	if ($("#thread-input-id").val().trim() == "") {
 		$("#thread-input-id").addClass("is-invalid");
 		error = true;
 	}
-	/* 
-	// NEED TO FIX -- add function so that clicked dropdown becomes selected
-	// Check is selection is made 
-	if ($("#form__categories-id").find(".selected").text() == "") {
+	
+	var optionSelected = $("option:selected", this);
+	if (optionSelected.val() == "") {
 		error = true;
-		console.log("none selected");
-		// NEED TO FIX -- add error box when none are selected
+		$("#new-thread-categories").css("border", "1px solid red");
 	}
-	*/
 
-	if (!error) {
-		console.log(event);
-		console.log("New Thread Submitted");
-		// NEED TO IMPLEMENT
+	if (error) {
+		event.preventDefault();
 	}
 });
 
@@ -48,4 +51,10 @@ $("#thread-input-id").on("input", function(event) {
 	if ($("#thread-input-id").val().trim().length > 0) {
 		$("#thread-input-id").removeClass("is-invalid");
 	}
+});
+
+// Change selected on click
+$(document).on("change", "#new-thread-categories", function(event) {
+var optionSelected = $("option:selected", this);
+	$("#new-thread-categories").css("border", "1px solid black");
 });
