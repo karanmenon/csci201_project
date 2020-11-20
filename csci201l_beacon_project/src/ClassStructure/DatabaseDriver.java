@@ -133,7 +133,7 @@ public class DatabaseDriver {
 		try(Connection connection = DriverManager.getConnection(serverConnection, user, pwd)){
 			
 			String sql = "INSERT INTO Users (username, password, userPoints) VALUES ('" 
-						+ usr.get_username() + "', '" + usr.get_password() + "0)";
+						+ usr.get_username() + "', '" + usr.get_password() + "', 0)";
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate(sql);
 		}
