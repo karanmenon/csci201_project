@@ -17,19 +17,48 @@ public class DatabaseDriver {
 	// GET functions
 	
 	public User getUser(String username, String password) {
-		
+		try(Connection connection = DriverManager.getConnection(db, user, pwd)){
+		}
+		catch(SQLIntegrityConstraintViolationException e) {
+		}
+		catch(SQLException e)
+		{
+
+		}
+
 	}
 	
-	public boolean isValidUser(Integer userID) {
-		
+	public boolean isValidUser(String username, String password) {
+		try(Connection connection = DriverManager.getConnection(db, user, pwd)){
+		}
+		catch(SQLIntegrityConstraintViolationException e) {
+		}
+		catch(SQLException e)
+		{
+			
+		}
 	}
 	
 	public BeaconSignal getSubBeacon(Integer disasterID) {
-		return null; 
+		try(Connection connection = DriverManager.getConnection(db, user, pwd)){
+		}
+		catch(SQLIntegrityConstraintViolationException e) {
+		}
+		catch(SQLException e)
+		{
+			
+		}
 	}
 	
 	public BeaconSignal getBeaconSignal(Integer postID) {
-		return null; 
+		try(Connection connection = DriverManager.getConnection(db, user, pwd)){
+		}
+		catch(SQLIntegrityConstraintViolationException e) {
+		}
+		catch(SQLException e)
+		{
+			
+		}
 	}
 	
 	// ADD functions - timeStamps should be created for each object like this: LocalDateTime time = LocalDateTime.now();
