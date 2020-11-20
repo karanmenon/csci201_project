@@ -4,14 +4,14 @@ import java.time.LocalDateTime;
 public class Comment {
 	
 	private String body; 
-	private Integer userId; 
+	private String userName; 
 	private LocalDateTime timestamp; 
 	private BeaconSignal post;
 	
-	public Comment(String bod, Integer id, LocalDateTime time, BeaconSignal bpost)
+	public Comment(String bod, String username, LocalDateTime time, BeaconSignal bpost)
 	{
 		body = bod; 
-		userId = id; 
+		userName = username; 
 		timestamp = time; 
 		post = bpost;
 	}
@@ -25,9 +25,9 @@ public class Comment {
 		return body; 
 	}
 	
-	public Integer get_userId() 
+	public String get_author() 
 	{
-		return userId; 
+		return userName; 
 	}
 	
 	public LocalDateTime get_time() 

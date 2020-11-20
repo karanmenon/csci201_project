@@ -26,8 +26,8 @@ public class SubBeaconRequest extends HttpServlet{
 		String category = request.getParameter("categories"); 
 		
 		SubBeacon sb = db.getSubBeacon(name); 
-		ArrayList<BeaconSignal> beaconSignals = sb.get_beaconSignals(); 
 		
+		// THIS WILL BE CHANGED DEPENDING ON WHAT FROND END
 		// should we be sending the whole subBeacon object, or smaller objects within subBeacon
 		request.setAttribute("subBeacon", sb);
 		request.getRequestDispatcher("/disaster_thread.jsp").forward(request, response); 
@@ -49,11 +49,10 @@ public class SubBeaconRequest extends HttpServlet{
 		
 		db.addSubBeacon(sb);
 		
+		// these will be changed depending on what frond end needs 
 		request.setAttribute("servlet_title", threadTitle);
 		request.setAttribute("servlet_categories", category);
-		
-		// request.getRequestDispatcher("/homepage.jsp").include(request, response);
-		
+				
 		RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/homepage.jsp");
 		reqDispatcher.forward(request, response);
 		

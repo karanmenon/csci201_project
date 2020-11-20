@@ -1,6 +1,7 @@
 package ClassStructure; 
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DatabaseDriver {
 	
@@ -14,24 +15,40 @@ public class DatabaseDriver {
 		pwd = "root";
 	}
 	
-	// GET functions
+	// gets the userID that corresponds with that specific user 
+	public Integer getUserId(String username) {
+		return 0; 
+	}
 	
+	// GET functions
 	public User getUser(String username, String password) {
 		return null; 
 	}
 	
-	public boolean isValidUser(Integer userID) {
-		return true; 
+	// checks to see if the username exists in the db table already  
+	public User isValidUser(String username) {
+		return null;  
 	}
 	
-	public BeaconSignal getSubBeacon(Integer disasterID) {
+	public SubBeacon getSubBeacon(String disasterTitle) {
 		return null; 
 	}
 	
+	// get all the subBeacons that are affiliated with said tag: ie. flood, hurricane 
+	public ArrayList<SubBeacon> getSubBeaconbyTag(String tag) {
+		return null; 
+	}
+	
+	// returns all posts(BeaconSignals) affiliated with that user
+	public ArrayList<BeaconSignal> getMyBeaconSignals(String username) {
+		return null;
+	}
+	
+	// array list of comments should be sorted by timestamp -- so SORT BY when retrieving comments from db
 	public BeaconSignal getBeaconSignal(Integer postID) {
 		return null; 
 	}
-	
+		
 	// ADD functions - timeStamps should be created for each object like this: LocalDateTime time = LocalDateTime.now();
 	
 	public void addSubBeacon(SubBeacon subBeacon) { // new forum, like "Hurricane Sandy"
@@ -98,7 +115,7 @@ public class DatabaseDriver {
 			
 			// insert new comment into Comments table
 			String sql2 = "INSERT INTO Comments (userID, postID, commentContent, timeStamps) VALUES (" 
-					+ comment.get_userId() + ", " + post_id + ", '" + comment.get_body() + "', '" + comment.get_time() + "')";
+					+ comment.get_author() + ", " + post_id + ", '" + comment.get_body() + "', '" + comment.get_time() + "')";
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate(sql2);
 			
@@ -106,10 +123,12 @@ public class DatabaseDriver {
 		catch(SQLException e) {
 			System.out.println("SQLException: " + e.getMessage());
 		}
-		
 	}
 	
 	public void addUser(User usr) {
+		
+		System.out.println("username: " + usr.get_username()); 
+		System.out.println("pass: " + usr.get_password()); 
 		
 		try(Connection connection = DriverManager.getConnection(serverConnection, user, pwd)){
 			
