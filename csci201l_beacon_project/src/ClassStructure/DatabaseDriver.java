@@ -17,79 +17,145 @@ public class DatabaseDriver {
 	
 	// gets the userID that corresponds with that specific user 
 	public Integer getUserId(String username) {
+		try(Connection connection = DriverManager.getConnection(serverConnection, user, pwd)){
+			String sql="SELECT userID FROM Users WHERE username="+username;
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next())
+			{
+				return rs.getInt("userID");
+			}
+			else
+			{
+				System.out.println("No account with that username");
+				return -1;
+			}
+		}
+		catch(SQLException e)
+		{
+			System.out.println("SQLException: " + e.getMessage());
+		}
 		return 0; 
 	}
 	
 	// GET functions
 	public User getUser(String username, String password) {
-		try(Connection connection = DriverManager.getConnection(db, user, pwd)){
+		try(Connection connection = DriverManager.getConnection(serverConnection, user, pwd)){
+			if (!(isValidUser(username, password)))
+				return null;
+			String sql="";
 		}
 		catch(SQLIntegrityConstraintViolationException e) {
 		}
 		catch(SQLException e)
 		{
-
+			System.out.println("SQLException: " + e.getMessage());
 		}
 
 	}
 	
 	public boolean isValidUser(String username, String password) {
-		try(Connection connection = DriverManager.getConnection(db, user, pwd)){
-		}
-		catch(SQLIntegrityConstraintViolationException e) {
+		try(Connection connection = DriverManager.getConnection(serverConnection, user, pwd)){
+			if(getUserId(username)==-1)
+				return false;
+			String sql="SELECT password FROM Users WHERE username="+username;
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next())
+			{
+				if (rs.getString("password").equals(password))
+					return true;
+			}
+			
 		}
 		catch(SQLException e)
 		{
-			
+			System.out.println("SQLException: " + e.getMessage());		
 		}
+		return false;
 	}
 	
-	public BeaconSignal getSubBeacon(Integer disasterID) {
-		try(Connection connection = DriverManager.getConnection(db, user, pwd)){
-		}
-		catch(SQLIntegrityConstraintViolationException e) {
+	// array list of comments should be sorted by timestamp -- so SORT BY when retrieving comments from db
+	public SubBeacon getSubBeacon(String disasterTitle) {
+		try(Connection connection = DriverManager.getConnection(serverConnection, user, pwd)){
+			ArrayList<BeaconSignal> posts=new ArrayList<BeaconSignal>();
+			String sql="SELECT disasterID FROM Disasters WHERE disasterName="+disasterTitle;
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next())
+			{
+				rs.beforeFirst();
+				while(rs.next())
+				{
+					
+				}
+			}
+			else
+			{
+				return null;
+			}
+			//SubBeacon(ArrayList<BeaconSignal> bSignals, String dis, String t) //dis=disaster name, t=tags
 		}
 		catch(SQLException e)
 		{
-			
+			System.out.println("SQLException: " + e.getMessage());		
 		}
 	}
 	
 	public BeaconSignal getBeaconSignal(Integer postID) {
-		try(Connection connection = DriverManager.getConnection(db, user, pwd)){
+		try(Connection connection = DriverManager.getConnection(serverConnection, user, pwd)){
 		}
 		catch(SQLIntegrityConstraintViolationException e) {
 		}
 		catch(SQLException e)
 		{
-			
+			System.out.println("SQLException: " + e.getMessage());		
 		}
 		return null; 
 	}
 	
 	// checks to see if the username exists in the db table already  
 	public User isValidUser(String username) {
+		try(Connection connection = DriverManager.getConnection(serverConnection, user, pwd)){
+		}
+		catch(SQLIntegrityConstraintViolationException e) {
+		}
+		catch(SQLException e)
+		{
+			System.out.println("SQLException: " + e.getMessage());
+		}
 		return null;  
 	}
 	
-	public SubBeacon getSubBeacon(String disasterTitle) {
-		return null; 
-	}
+	
 	
 	// get all the subBeacons that are affiliated with said tag: ie. flood, hurricane 
 	public ArrayList<SubBeacon> getSubBeaconbyTag(String tag) {
+		try(Connection connection = DriverManager.getConnection(serverConnection, user, pwd)){
+		}
+		catch(SQLIntegrityConstraintViolationException e) {
+		}
+		catch(SQLException e)
+		{
+			System.out.println("SQLException: " + e.getMessage());
+		}
 		return null; 
 	}
 	
 	// returns all posts(BeaconSignals) affiliated with that user
 	public ArrayList<BeaconSignal> getMyBeaconSignals(String username) {
+		try(Connection connection = DriverManager.getConnection(serverConnection, user, pwd)){
+		}
+		catch(SQLIntegrityConstraintViolationException e) {
+		}
+		catch(SQLException e)
+		{
+			System.out.println("SQLException: " + e.getMessage());
+		}
 		return null;
 	}
 	
-	// array list of comments should be sorted by timestamp -- so SORT BY when retrieving comments from db
-	public BeaconSignal getBeaconSignal(Integer postID) {
-		return null; 
-	}
+
 		
 	// ADD functions - timeStamps should be created for each object like this: LocalDateTime time = LocalDateTime.now();
 	
