@@ -42,7 +42,7 @@ public class UserRequest extends HttpServlet
 			counter++; 
 		}
 		 // checks to see if the user exists according to inputted parameters
-		if (db.isValidUser(username) != null) {
+		if (db.getUserId(username) != -1) {
 			error += "User doesn't exist. Please create an account."; 
 			counter++; 
 		}
@@ -78,7 +78,7 @@ public class UserRequest extends HttpServlet
 			counter++; 
 		}
 		// user already exists, need to create a new 
-		if (db.isValidUser(username) != null) {
+		if (db.getUserId(username) != -1) {
 			error += "User already exists, please login to already existing account or create a new account"; 
 			counter++; 
 		}

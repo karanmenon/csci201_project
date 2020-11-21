@@ -4,8 +4,6 @@ import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import org.graalvm.compiler.lir.alloc.lsra.ssa.SSALinearScanEliminateSpillMovePhase;
-
 public class DatabaseDriver {
 	
 	String serverConnection;
@@ -61,9 +59,6 @@ public class DatabaseDriver {
 		{
 			System.out.println("SQLException: " + e.getMessage());
 		}
-<<<<<<< HEAD
-		return null; 
-=======
 		return ""; 		
 	}
 	
@@ -74,7 +69,6 @@ public class DatabaseDriver {
 			User u= new User(username, password);
 			return u;
 
->>>>>>> 719f2b9bf387b5a97e4ced09d9f61035f6071f79
 
 	}
 	
