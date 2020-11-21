@@ -61,6 +61,9 @@ public class DatabaseDriver {
 		{
 			System.out.println("SQLException: " + e.getMessage());
 		}
+<<<<<<< HEAD
+		return null; 
+=======
 		return ""; 		
 	}
 	
@@ -71,6 +74,7 @@ public class DatabaseDriver {
 			User u= new User(username, password);
 			return u;
 
+>>>>>>> 719f2b9bf387b5a97e4ced09d9f61035f6071f79
 
 	}
 	
@@ -157,6 +161,7 @@ public class DatabaseDriver {
 		{
 			System.out.println("SQLException: " + e.getMessage());		
 		}
+		return null; 
 	}
 	
 	public BeaconSignal getBeaconSignal(Integer postID) {
