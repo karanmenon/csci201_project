@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -59,6 +60,10 @@ public class SubBeaconRequest extends HttpServlet{
 			// these will be changed depending on what frond end needs 
 			request.setAttribute("servlet_title", threadTitle);
 			request.setAttribute("servlet_categories", category);
+			
+			Cookie[] cookies = request.getCookies(); 
+			String username = cookies[0].getValue(); 
+			request.setAttribute("username", username); 
 					
 			reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/homepage.jsp");
 		}
