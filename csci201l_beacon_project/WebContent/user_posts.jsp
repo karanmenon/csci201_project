@@ -1,3 +1,4 @@
+<%@ page import="java.io.*,java.util.*, javax.servlet.*, Servlets.MyPostsRequest, ClassStructure.BeaconSignal, ClassStructure.DatabaseDriver" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,45 +12,50 @@
 </head>
 <body>
 	<jsp:include page="navbar.jsp"></jsp:include>
-
-
+	
 	<!-- Main Content -->
 	<div class="content-header">
 		<h1 class="thread-name">My Posts</h1>
-		<div class="filters-and-button">
-			<form class="form" id="filters-form-id" action="" method="GET">
-				<label id="category-label-id" for="form__categories-id">Category:</label>
-	            <select name="filter_category" id="form__categories-id">
-	                <option value="All">All</option>
-	                <option value="Fire">Fire</option>
-	                <option value="Earthquake">Earthquake</option>
-	                <option value="Tornado">Tornado</option>
-	                <option value="Hurricane">Hurricane</option>
-	            </select>
-
-	            <label id="sort-label-id" for="form__sort-id">Sort By:</label>
-	            <select name="sort_by" id="form__sort-id">
-	                <option value="Newest">Newest</option>
-	                <option value="Closest">Closest</option>
-	                <option value="Trending">Trending</option>
-	            </select>
-			</form>
-		</div>
 	</div>
 
+	<%  Cookie[] cookies = request.getCookies();
+		Cookie loginCookie = null;
+		for(int i = 0; i < cookies.length; i++)
+		{
+			Cookie cookie = cookies[i];
+            if(cookies[i].getName().equals("username"))
+            {
+            	loginCookie = cookies[i];
+            }
+		}
+		
+		String username = loginCookie.getValue();
+		
+		MyPostsRequest m = new MyPostsRequest();
+		ArrayList<BeaconSignal> posts = m.getPosts(username);
+	%>
+	
+	
 	<div class="content">
+	<% DatabaseDriver db = new DatabaseDriver();
+	if(posts != null)
+	{
+	for(int i = 0; i < posts.size(); i++)
+		{%>
 		<!-- PLACEHOLDER - Posts will be created dynamically -->
 		<div class="post">
 			<div class="post-username">
-				Username
+				<%= db.getUsernameFromId(posts.get(i).get_userId()) %>
 			</div>
 			<div class="post-title">
-				Post Title
+				<%= posts.get(i).get_postTitle() %>
 			</div>
 			<div class="post-comment">
 				<span><i class="fas fa-comment"></i> Comments</span>
 			</div>
 		</div>
+		<% }}
+	else out.println("asdlfajdslkfjdlfj");%>
 
 		<div class="post">
 			<div class="post-username">

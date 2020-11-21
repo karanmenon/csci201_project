@@ -32,4 +32,9 @@ public class MyPostsRequest extends HttpServlet {
 		RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/user_posts.jsp");
 		reqDispatcher.forward(request, response);
 	}
+	
+	public ArrayList<BeaconSignal> getPosts(String username)
+	{
+		return db.getMyBeaconSignals(username);
+	}
 }
