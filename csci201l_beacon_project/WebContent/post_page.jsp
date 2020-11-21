@@ -18,12 +18,9 @@
 		<div class="post-username">Posted by: Username</div>
 		<div class="post-title">Title</div>
 		<div class="post-info">Info Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info Info</div>
-		<!-- <div class="post-image">
-			<img src="https://www.gaithersburgdental.com/wp-content/uploads/2016/10/orionthemes-placeholder-image.png">
-		</div> -->
-		<div class="post-options">
-			<span class="upvote">Upvote</span>
-		</div>
+		<form action="CommentRequest" method="POST" id="comment-form-id">
+			<input name="comment_text" id="comment-input-id" placeholder="Comment">
+		</form>
 		<div class="comments">
 			<div class="comment-block">
 				<span class="comment-username">Username</span>
