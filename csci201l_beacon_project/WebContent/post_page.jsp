@@ -13,8 +13,8 @@
 	<!-- Navbar -->
 	<nav class="navbar navbar-dark bg-dark">
 		<a class="navbar-brand" href="#">Beacon</a>
-		<form class="form form-inline" id="search-form-id">
-  			<input class="form-control" type="text" id="searchbar-id" placeholder="Search">
+		<form class="form form-inline" id="search-form-id" action="" method="GET">
+  			<input name="search_title" class="form-control" type="text" id="searchbar-id" placeholder="Search">
   		</form>
 		<div class="user">
 			<i class="fas fa-user"></i>
@@ -48,9 +48,9 @@
 		<div class="post-username">Posted by: Username</div>
 		<div class="post-title">Title</div>
 		<div class="post-info">Info Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info Info</div>
-		<div class="post-image">
+		<!-- <div class="post-image">
 			<img src="https://www.gaithersburgdental.com/wp-content/uploads/2016/10/orionthemes-placeholder-image.png">
-		</div>
+		</div> -->
 		<div class="post-options">
 			<span class="upvote">Upvote</span>
 		</div>

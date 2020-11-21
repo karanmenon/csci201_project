@@ -51,6 +51,11 @@ public class BeaconSignal {
 	public ArrayList<Comment> get_comments() {
 		return comments; 
 	}
+
+	public void setComments(ArrayList<Comment> c)
+	{
+		comments=c;
+	}
 	
 	public void set_postId(Integer id) {
 		postID = id; 

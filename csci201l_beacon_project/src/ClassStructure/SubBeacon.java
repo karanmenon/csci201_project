@@ -18,6 +18,11 @@ public class SubBeacon {
 	public ArrayList<BeaconSignal> get_beaconSignals() {
 		return beaconSignals; 
 	}
+
+	public void setBeaconSignals(ArrayList<BeaconSignal> a)
+	{
+		beaconSignals=a;
+	}
 	
 	public String get_disaster() {
 		return disaster; 

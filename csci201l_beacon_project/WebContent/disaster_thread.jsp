@@ -13,8 +13,8 @@
 	<!-- Navbar -->
 	<nav class="navbar navbar-dark bg-dark">
 		<a class="navbar-brand" href="#">Beacon</a>
-		<form class="form form-inline" id="search-form-id">
-  			<input class="form-control" type="text" id="searchbar-id" placeholder="Search">
+		<form class="form form-inline" id="search-form-id" action="" method="GET">
+  			<input name="search_title" class="form-control" type="text" id="searchbar-id" placeholder="Search">
   		</form>
 		<div class="user">
 			<i class="fas fa-user"></i>
@@ -48,18 +48,9 @@
 		<!-- PLACEHOLDER - Retrieve name of disaster thread dynamically -->
 		<h1 class="thread-name">Thread Name</h1>
 		<div class="filters-and-button">
-			<form class="form" id="filters-form-id">
-				<label id="category-label-id" for="form__categories-id">Category:</label>
-	            <select name="categories" id="form__categories-id">
-	                <option value="All">All</option>
-	                <option value="Fire">Fire</option>
-	                <option value="Earthquake">Earthquake</option>
-	                <option value="Tornado">Tornado</option>
-	                <option value="Hurricane">Hurricane</option>
-	            </select>
-
+			<form class="form" id="filters-form-id" action="" method="GET">
 	            <label id="sort-label-id" for="form__sort-id">Sort By:</label>
-	            <select name="sort" id="form__sort-id">
+	            <select name="sort_by" id="form__sort-id">
 	                <option value="Newest">Newest</option>
 	                <option value="Closest">Closest</option>
 	                <option value="Trending">Trending</option>
@@ -117,16 +108,16 @@
 		<div class="modal-content">
 			<div id="modal-content__header">Create New Post</div>
 			<form id="post-form-id" action="" method="POST">
-				<input class="form-control" type="text" id="post-title-input-id" placeholder="Title/Description">
+				<input name="modal_title" class="form-control" type="text" id="post-title-input-id" placeholder="Title/Description">
 				<div class="post-location-input">
-					<input class="form-control" type="text" id="post-city-input-id" placeholder="City">
-					<input class="form-control" type="text" id="post-state-input-id" placeholder="State">
+					<input name="modal_city" class="form-control" type="text" id="post-city-input-id" placeholder="City">
+					<input name="modal_state" class="form-control" type="text" id="post-state-input-id" placeholder="State">
 				</div>
-				<textarea class="form-control" id="post-info-input-id" placeholder="Info"></textarea>
-				<div id="post-img-upload">
+				<textarea name="modal_info" class="form-control" id="post-info-input-id" placeholder="Info"></textarea>
+				<!-- <div id="post-img-upload">
 					<label for="img">Upload image:</label>
 	  				<input type="file" id="post-img-input-id" name="img" accept="image/*">
-	  			</div>
+	  			</div> -->
 	            <div class="modal-content__buttons">
 	            	<button type="submit" id="submit-btn-id" class="btn btn-primary">Submit</button>
 	            	<button type="button" id="discard-btn-id" class="btn btn-secondary">Discard</button>

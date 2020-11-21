@@ -13,8 +13,8 @@
 	<!-- Navbar -->
 	<nav class="navbar navbar-dark bg-dark">
 		<a class="navbar-brand" href="#">Beacon</a>
-		<form class="form form-inline" id="search-form-id">
-  			<input class="form-control" type="text" id="searchbar-id" placeholder="Search">
+		<form class="form form-inline" id="search-form-id" action="" method="GET">
+  			<input name="search_title" class="form-control" type="text" id="searchbar-id" placeholder="Search">
   		</form>
 		<div class="user">
 			<i class="fas fa-user"></i>
@@ -45,9 +45,9 @@
 
 	<!-- Main Content -->
 	<div class="content-header">
-		<form class="form" id="filters-form-id" action="" method="POST">
+		<form class="form" id="filters-form-id" action="" method="GET">
 			<label id="category-label-id" for="form__categories-id">Category:</label>
-            <select name="categories" id="form__categories-id">
+            <select name="filter_category" id="form__categories-id">
                 <option value="All">All</option>
                 <option value="Fire">Fire</option>
                 <option value="Earthquake">Earthquake</option>
@@ -56,7 +56,7 @@
             </select>
 
             <label id="sort-label-id" for="form__sort-id">Sort By:</label>
-            <select name="sort" id="form__sort-id">
+            <select name="sort_by" id="form__sort-id">
                 <option value="Newest">Newest</option>
                 <option value="Closest">Closest</option>
                 <option value="Trending">Trending</option>
@@ -103,11 +103,11 @@
 		
 		<div class="modal-content">
 			<div id="modal-content__header">Create New Disaster Thread</div>
-			<form id="thread-form-id">
-				<input class="form-control" type="text" id="thread-input-id" placeholder="Thread Title">
+			<form id="thread-form-id" action="" method="POST">
+				<input name="modal_title" class="form-control" type="text" id="thread-input-id" placeholder="Thread Title">
 				<div>
 					<label id="category-label-id" for="form__categories-id">Category:</label>
-					<select name="categories" id="new-thread-categories">
+					<select name="modal_category" id="new-thread-categories">
 						<option class="categories__default" value="" selected disabled>-- Select--</option>
 		                <option value="Fire">Fire</option>
 		                <option value="Earthquake">Earthquake</option>
