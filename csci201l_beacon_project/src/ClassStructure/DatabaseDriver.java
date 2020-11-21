@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class DatabaseDriver {
-	
+
 	String serverConnection;
 	String user = "root";
 	String pwd = "root";
@@ -16,6 +16,7 @@ public class DatabaseDriver {
 		pwd = "root";
 	}
 	
+	//Karan's Code
 	// gets the userID that corresponds with that specific user 
 	public Integer getUserId(String username) {
 		try(Connection connection = DriverManager.getConnection(serverConnection, user, pwd)){
@@ -39,6 +40,7 @@ public class DatabaseDriver {
 		return 0; 
 	}
 
+	//finds username given userID (necessary as many tables use userID as a foreign key)
 	public String getUsernameFromId(Integer userID)
 	{
 		try(Connection connection = DriverManager.getConnection(serverConnection, user, pwd)){
@@ -72,6 +74,8 @@ public class DatabaseDriver {
 
 	}
 	
+	//helpful for login, verifies user exists then checks if password is correct
+
 	public boolean isValidUser(String username, String password) {
 		try(Connection connection = DriverManager.getConnection(serverConnection, user, pwd)){
 			if(getUserId(username)==-1)
@@ -94,28 +98,31 @@ public class DatabaseDriver {
 	}
 	
 	// array list of comments should be sorted by timestamp -- so SORT BY when retrieving comments from db
+
 	public SubBeacon getSubBeacon(String disasterTitle) {
 		try(Connection connection = DriverManager.getConnection(serverConnection, user, pwd)){
 			ArrayList<BeaconSignal> posts=new ArrayList<BeaconSignal>();
 			String sql="SELECT disasterID FROM Disasters WHERE disasterName='"+disasterTitle+"'";
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
-			SubBeacon s= new SubBeacon(posts, rs.getString("disasterName"), rs.getString("disasterType"));;
-			if(rs.next())
+			SubBeacon s= new SubBeacon(posts, rs.getString("disasterName"), rs.getString("disasterType")); //creates a subbeacon object, note that the beacon signals arent in yet
+			if(rs.next()) //finds disaster info from title
 			{
 
 				String sql1="SELECT * FROM Posts WHERE disasterID="+rs.getInt("disasterID") + (" ORDER BY timeStamps DESC");
 				PreparedStatement ps1=connection.prepareStatement(sql1);
 				ResultSet rs1=ps1.executeQuery();
 
-				if(rs1.next())
+				if(rs1.next()) //finds posts associated with the disaster to create an arraylist of beaconsignals for the subbeacon
 				{
 					rs1.beforeFirst();
 					while(rs1.next())
 					{
 						ArrayList<Comment> c= new ArrayList<Comment>();
+						//creates beacon signal to add to arraylist
 						BeaconSignal b= new BeaconSignal( (Integer) rs1.getInt("postID"), s, rs1.getString("postTitle"), rs1.getString("postContent"), (LocalDateTime) rs1.getObject("timeStamps"), c);
 						
+						//looks for comments for each beaconsignal
 						String sql2="SELECT * FROM Comments WHERE postID="+rs1.getString("postID") + " ORDER BY timeStamps DESC";
 						PreparedStatement ps2=connection.prepareStatement(sql2);
 						ResultSet rs2=ps2.executeQuery();
@@ -131,7 +138,7 @@ public class DatabaseDriver {
 							}
 
 						}
-						b.setComments(c);
+						b.setComments(c); //updates comments arraylist
 
 						posts.add(b);
 						//SubBeacon beacon, String title, String body, LocalDateTime time, ArrayList<Comment> comms
@@ -174,27 +181,27 @@ public class DatabaseDriver {
 				String sql2="SELECT * FROM Comments WHERE postID="+postID + " ORDER BY timeStamps DESC";
 				PreparedStatement ps2=connection.prepareStatement(sql2);
 				ResultSet rs2=ps2.executeQuery();
+
+				if(rs2.next())
+				{
+					rs2.beforeFirst();
+					while(rs2.next())
+					{
+						Comment comm= new Comment(rs2.getString("commentContent"), getUsernameFromId(rs2.getInt("userID")), (LocalDateTime) rs2.getObject("timeStamps"), b);
+						c.add(comm);
+	
+						//bod, username, time, bdpost
+					}
+	
+				}
+				b.setComments(c);
+				return b;
 			}
 			else
 			{
 				System.out.println("Post not found! Doesn't mean you can't create one!");
 				return null;
 			}
-
-			if(rs2.next())
-			{
-				rs2.beforeFirst();
-				while(rs2.next())
-				{
-					Comment comm= new Comment(rs2.getString("commentContent"), getUsernameFromId(rs2.getInt("userID")), (LocalDateTime) rs2.getObject("timeStamps"), b);
-					c.add(comm);
-
-					//bod, username, time, bdpost
-				}
-
-			}
-			b.setComments(c);
-			return b;
 		}
 		catch(SQLException e)
 		{
@@ -301,6 +308,7 @@ public class DatabaseDriver {
 	}
 	
 
+	//Erin's code
 		
 	// ADD functions - timeStamps should be created for each object like this: LocalDateTime time = LocalDateTime.now();
 	
