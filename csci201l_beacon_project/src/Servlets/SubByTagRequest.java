@@ -22,7 +22,7 @@ public class SubByTagRequest extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+	public void service(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
 		String tag = request.getParameter("categories"); 
