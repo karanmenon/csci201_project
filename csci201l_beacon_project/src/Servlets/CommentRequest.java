@@ -11,8 +11,10 @@ import java.util.concurrent.Executors;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
+@WebServlet("/CommentRequest")
 public class CommentRequest extends HttpServlet {
 	
 	DatabaseDriver db = new DatabaseDriver(); 
@@ -34,6 +36,7 @@ public class CommentRequest extends HttpServlet {
 			executor.execute(r);
 				
 			String comment = request.getParameter("comment_text");
+			System.out.println(comment);
 			BeaconSignal bs = (BeaconSignal) request.getAttribute("beaconSignal");
 			String username = (String) request.getAttribute("username"); 
 			

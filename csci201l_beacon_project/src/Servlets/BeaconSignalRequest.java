@@ -38,8 +38,8 @@ public class BeaconSignalRequest extends HttpServlet {
 		response.setContentType("test/html"); 
 		
 		// creates a new BeaconSignal object and adds to db 
-		String title = request.getParameter("title");
-		String postBody = request.getParameter("text_box");
+		String title = request.getParameter("modal_title");
+		String postBody = request.getParameter("modal_info");
 		
 		// checking to see if user is a guest. if not, redirect to login 
 		RequestDispatcher reqDispatcher;

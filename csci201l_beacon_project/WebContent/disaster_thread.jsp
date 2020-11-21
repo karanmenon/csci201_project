@@ -16,16 +16,8 @@
 	<!-- Main Content -->
 	<div class="content-header">
 		<!-- PLACEHOLDER - Retrieve name of disaster thread dynamically -->
-		<h1 class="thread-name">Thread Name</h1>
 		<div class="filters-and-button">
-			<form class="form" id="filters-form-id" action="" method="GET">
-	            <label id="sort-label-id" for="form__sort-id">Sort By:</label>
-	            <select name="sort_by" id="form__sort-id">
-	                <option value="Newest">Newest</option>
-	                <option value="Closest">Closest</option>
-	                <option value="Trending">Trending</option>
-	            </select>
-			</form>
+			<h1 class="thread-name">Thread Name</h1>
 			<button type="button" id="report-btn-id" class="btn btn-danger">Report</button>
 		</div>
 	</div>
@@ -77,12 +69,8 @@
 		
 		<div class="modal-content">
 			<div id="modal-content__header">Create New Post</div>
-			<form id="post-form-id" action="" method="POST">
+			<form id="post-form-id" action="BeaconSignalRequest" method="POST">
 				<input name="modal_title" class="form-control" type="text" id="post-title-input-id" placeholder="Title/Description">
-				<div class="post-location-input">
-					<input name="modal_city" class="form-control" type="text" id="post-city-input-id" placeholder="City">
-					<input name="modal_state" class="form-control" type="text" id="post-state-input-id" placeholder="State">
-				</div>
 				<textarea name="modal_info" class="form-control" id="post-info-input-id" placeholder="Info"></textarea>
 				<!-- <div id="post-img-upload">
 					<label for="img">Upload image:</label>

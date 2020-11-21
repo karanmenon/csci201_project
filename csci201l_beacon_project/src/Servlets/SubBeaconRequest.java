@@ -59,8 +59,8 @@ public class SubBeaconRequest extends HttpServlet{
 		}
 		else {
 			// parameters should match the name="" in input tags
-			String threadTitle = request.getParameter("title");
-			String category = request.getParameter("categories");
+			String threadTitle = request.getParameter("modal_title");
+			String category = request.getParameter("modal_category");
 			ArrayList<BeaconSignal> beaconSignals = new ArrayList<BeaconSignal>(); 
 			
 			SubBeacon sb = new SubBeacon(beaconSignals, threadTitle, category); 

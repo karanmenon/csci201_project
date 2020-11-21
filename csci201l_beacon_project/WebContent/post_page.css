@@ -37,6 +37,14 @@
 	cursor: pointer;
 }
 
+#comment-form-id {
+	width: 100%;
+}
+
+#comment-input-id {
+	width: 100%;
+}
+
 .comment-block {
 	margin-top: 10px;
 	display: flex;
