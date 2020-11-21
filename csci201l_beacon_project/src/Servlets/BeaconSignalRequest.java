@@ -40,25 +40,31 @@ public class BeaconSignalRequest extends HttpServlet {
 		String title = request.getParameter("title");
 		String postBody = request.getParameter("text_box");
 		
-		// how will we ensure that we know the author of the post? 
-		String username = request.getParameter("username"); 
-		User usr = db.isValidUser(username); 
-		Integer userID = db.getUserId(username); 
+		// checking to see if user is a guest. if not, redirect to login 
+		RequestDispatcher reqDispatcher;
+		if (request.getCookies().length == 0) {
+			reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/login.jsp");
+		}
 		
-		// change this if we have the SubBeacon object already 
-		String subBeaconTitle = request.getParameter("disaster_title"); 
-		SubBeacon sb = db.getSubBeacon(subBeaconTitle);
+		else {
+			String username = request.getCookies()[0].getValue();
+			Integer userID = db.getUserId(username); 
+			
+			// change this if we have the SubBeacon object already 
+			String subBeaconTitle = request.getParameter("disaster_title"); 
+			SubBeacon sb = db.getSubBeacon(subBeaconTitle);
+			
+			
+			LocalDate timeStamp = LocalDate.now();
+			ArrayList<Comment> comments = new ArrayList<Comment>(); 
+			
+			BeaconSignal beacon = new BeaconSignal(userID, sb, title, postBody, LocalDateTime.now(), comments); 
+			db.addBeaconSignal(beacon);
+			reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/post_page.jsp");
+					
+		}
 		
-		
-		LocalDate timeStamp = LocalDate.now();
-		ArrayList<Comment> comments = new ArrayList<Comment>(); 
-		
-		BeaconSignal beacon = new BeaconSignal(userID, sb, title, postBody, LocalDateTime.now(), comments); 
-		db.addBeaconSignal(beacon);
-				
 		// TODO: sets correct attributes to be displayed by front end
-				
-		RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/post_page.jsp");
 		reqDispatcher.forward(request, response);
 
 	}

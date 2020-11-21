@@ -40,20 +40,28 @@ public class SubBeaconRequest extends HttpServlet{
 				
 		response.setContentType("test/html"); 
 		
-		// parameters should match the name="" in input tags
-		String threadTitle = request.getParameter("title");
-		String category = request.getParameter("categories");
-		ArrayList<BeaconSignal> beaconSignals = new ArrayList<BeaconSignal>(); 
+		RequestDispatcher reqDispatcher;
 		
-		SubBeacon sb = new SubBeacon(beaconSignals, threadTitle, category); 
-		
-		db.addSubBeacon(sb);
-		
-		// these will be changed depending on what frond end needs 
-		request.setAttribute("servlet_title", threadTitle);
-		request.setAttribute("servlet_categories", category);
-				
-		RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/homepage.jsp");
+		// checking to see if user is a guest. if not, redirect to login 
+		if (request.getCookies().length == 0) {
+			reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/login.jsp");
+		}
+		else {
+			// parameters should match the name="" in input tags
+			String threadTitle = request.getParameter("title");
+			String category = request.getParameter("categories");
+			ArrayList<BeaconSignal> beaconSignals = new ArrayList<BeaconSignal>(); 
+			
+			SubBeacon sb = new SubBeacon(beaconSignals, threadTitle, category); 
+			
+			db.addSubBeacon(sb);
+			
+			// these will be changed depending on what frond end needs 
+			request.setAttribute("servlet_title", threadTitle);
+			request.setAttribute("servlet_categories", category);
+					
+			reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/homepage.jsp");
+		}
 		reqDispatcher.forward(request, response);
 		
 	}

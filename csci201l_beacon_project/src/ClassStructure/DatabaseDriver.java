@@ -51,6 +51,7 @@ public class DatabaseDriver {
 		{
 			System.out.println("SQLException: " + e.getMessage());
 		}
+		return null; 
 
 	}
 	
@@ -100,6 +101,7 @@ public class DatabaseDriver {
 		{
 			System.out.println("SQLException: " + e.getMessage());		
 		}
+		return null; 
 	}
 	
 	public BeaconSignal getBeaconSignal(Integer postID) {

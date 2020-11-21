@@ -6,6 +6,8 @@ import ClassStructure.*;
 
 import java.io.*;
 import java.time.LocalDateTime;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,20 +21,37 @@ public class CommentRequest extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
-		String comment = request.getParameter("comment_text");
-		BeaconSignal bs = (BeaconSignal) request.getAttribute("beaconSignal");
-		String username = (String) request.getAttribute("username"); 
+		RequestDispatcher reqDispatcher;
 		
-		Comment newCom = new Comment(comment, username, LocalDateTime.now(), bs); 
-		db.addComment(newCom);
+		// checking to see if user is a guest. if not, redirect to login 
+		if (request.getCookies().length == 0) {
+			reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/login.jsp");
+			reqDispatcher.forward(request, response);
+		}
+		else {
+			ExecutorService executor = Executors.newCachedThreadPool();
+			RefreshComments r = new RefreshComments();
+			executor.execute(r);
 				
-		// call the beaconSignal again that now contains the added comment 
-		BeaconSignal newBeacon = db.getBeaconSignal(bs.get_postId()); 
-		
-		// IMPLEMENT WHEN WE KNOW FRONT END WANTS 
-		
-		RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/post_page.jsp");
-		reqDispatcher.forward(request, response);
+			String comment = request.getParameter("comment_text");
+			BeaconSignal bs = (BeaconSignal) request.getAttribute("beaconSignal");
+			String username = (String) request.getAttribute("username"); 
+			
+			Comment newCom = new Comment(comment, username, LocalDateTime.now(), bs); 
+			db.addComment(newCom);
+					
+			// call the beaconSignal again that now contains the added comment 
+			BeaconSignal newBeacon = db.getBeaconSignal(bs.get_postId()); 
+			
+			// IMPLEMENT WHEN WE KNOW FRONT END WANTS 
+			
+			reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/post_page.jsp");
+			reqDispatcher.forward(request, response);
+			executor.shutdown();
+			while (!executor.isTerminated()) {
+				Thread.yield();
+			}
+		}
 		
 	}
 
