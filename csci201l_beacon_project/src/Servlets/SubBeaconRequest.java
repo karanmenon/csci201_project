@@ -18,13 +18,24 @@ public class SubBeaconRequest extends HttpServlet{
 	
 	DatabaseDriver db = new DatabaseDriver(); 
 	
+	public void service(HttpServletRequest request, HttpServletResponse responsee) 
+			throws ServletException, IOException {
+		
+		ArrayList<SubBeacon> SubBeacons = db.getSubBeacons(); 
+		
+		if (SubBeacons.isEmpty()) {
+			
+		}
+		request.setAttribute("SubBeacons", SubBeacons);
+	}
+	
 	// retireve a subBeacon from the database
 	public void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		response.setContentType("test/html"); 
 
 		String name = request.getParameter("name"); 
-		// String category = request.getParameter("categories"); 
+		String category = request.getParameter("categories");
 		
 		SubBeacon sb = db.getSubBeacon(name); 
 		
