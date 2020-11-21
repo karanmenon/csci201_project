@@ -9,17 +9,21 @@
 			<i class="fas fa-caret-down"></i>
 			<% Cookie[] cookies = request.getCookies();
 			boolean loggedIn = false;
+			Cookie loginCookie = null;
 			for(int i = 0; i < cookies.length; i++)
 			{
 				Cookie cookie = cookies[i];
-	            if(cookie.getName().equals("username"))
+	            if(cookies[i].getName().equals("username"))
+	            {
 	            	loggedIn = true;
+	            	loginCookie = cookies[i];
+	            }
 			}
 			if(loggedIn){%>
 			<!-- Display on click when user is logged-in -->
 			<div class="user__user-dropdown">
 				<!-- PLACEHOLDER - Retrieve username dynamically -->
-				<div class="user-dropdown__username" id="username-id">Username</div>
+				<div class="user-dropdown__username" id="username-id"><%= loginCookie.getValue() %></div>
 				<button type="button" class="btn user-dropdown__btn" id="my-posts-btn-id">My Posts</button>
 				<form action = "LogOutRequest" method = "GET">
 					<button type="submit" class="btn user-dropdown__btn" id="logout-btn-id">
