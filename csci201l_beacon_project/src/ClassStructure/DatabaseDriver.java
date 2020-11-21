@@ -19,7 +19,7 @@ public class DatabaseDriver {
 	// gets the userID that corresponds with that specific user 
 	public Integer getUserId(String username) {
 		try(Connection connection = DriverManager.getConnection(serverConnection, user, pwd)){
-			String sql="SELECT userID FROM Users WHERE username="+username;
+			String sql="SELECT userID FROM Users WHERE username='"+username+"'";
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			if(rs.next())
@@ -42,7 +42,7 @@ public class DatabaseDriver {
 	public String getUsernameFromId(Integer userID)
 	{
 		try(Connection connection = DriverManager.getConnection(serverConnection, user, pwd)){
-			String sql="SELECT username FROM Users WHERE userID="+userID;
+			String sql="SELECT username FROM Users WHERE userID='"+userID+"'";
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			if(rs.next())
@@ -76,7 +76,7 @@ public class DatabaseDriver {
 		try(Connection connection = DriverManager.getConnection(serverConnection, user, pwd)){
 			if(getUserId(username)==-1)
 				return false;
-			String sql="SELECT password FROM Users WHERE username="+username;
+			String sql="SELECT password FROM Users WHERE username='"+username+"'";
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			if(rs.next())
@@ -97,7 +97,7 @@ public class DatabaseDriver {
 	public SubBeacon getSubBeacon(String disasterTitle) {
 		try(Connection connection = DriverManager.getConnection(serverConnection, user, pwd)){
 			ArrayList<BeaconSignal> posts=new ArrayList<BeaconSignal>();
-			String sql="SELECT disasterID FROM Disasters WHERE disasterName="+disasterTitle;
+			String sql="SELECT disasterID FROM Disasters WHERE disasterName='"+disasterTitle+"'";
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			SubBeacon s= new SubBeacon(posts, rs.getString("disasterName"), rs.getString("disasterType"));;
