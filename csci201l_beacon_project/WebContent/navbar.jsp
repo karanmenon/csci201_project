@@ -1,9 +1,6 @@
 <!-- Navbar -->
 	<nav class="navbar navbar-dark bg-dark">
 		<a class="navbar-brand" href="#">Beacon</a>
-		<form class="form form-inline" id="search-form-id" action="" method="GET">
-  			<input name="search_title" class="form-control" type="text" id="searchbar-id" placeholder="Search">
-  		</form>
 		<div class="user">
 			<i class="fas fa-user"></i>
 			<i class="fas fa-caret-down"></i>
