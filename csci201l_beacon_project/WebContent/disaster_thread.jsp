@@ -16,16 +16,8 @@
 	<!-- Main Content -->
 	<div class="content-header">
 		<!-- PLACEHOLDER - Retrieve name of disaster thread dynamically -->
-		<h1 class="thread-name">Thread Name</h1>
 		<div class="filters-and-button">
-			<form class="form" id="filters-form-id" action="" method="GET">
-	            <label id="sort-label-id" for="form__sort-id">Sort By:</label>
-	            <select name="sort_by" id="form__sort-id">
-	                <option value="Newest">Newest</option>
-	                <option value="Closest">Closest</option>
-	                <option value="Trending">Trending</option>
-	            </select>
-			</form>
+			<h1 class="thread-name">Thread Name</h1>
 			<button type="button" id="report-btn-id" class="btn btn-danger">Report</button>
 		</div>
 	</div>

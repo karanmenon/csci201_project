@@ -24,13 +24,6 @@
                 <option value="Tornado">Tornado</option>
                 <option value="Hurricane">Hurricane</option>
             </select>
-
-            <label id="sort-label-id" for="form__sort-id">Sort By:</label>
-            <select name="sort_by" id="form__sort-id">
-                <option value="Newest">Newest</option>
-                <option value="Closest">Closest</option>
-                <option value="Trending">Trending</option>
-            </select>
 		</form>
 		<button type="button" id="report-btn-id" class="btn btn-danger">Report</button>
 	</div>
