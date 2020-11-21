@@ -15,8 +15,8 @@ import ClassStructure.*;
 /**
  * Servlet implementation class UserPostsRequest
  */
-@WebServlet("/UserBSRequest")
-public class UserBSRequest extends HttpServlet {
+@WebServlet("/MyPostsRequest")
+public class MyPostsRequest extends HttpServlet {
 	
 	DatabaseDriver db = new DatabaseDriver(); 
 	
@@ -25,8 +25,9 @@ public class UserBSRequest extends HttpServlet {
 		
 		String username = request.getParameter("username"); 
 		ArrayList<BeaconSignal> beaconSignals = db.getMyBeaconSignals(username);
-		
-		// TODO: DEPENDING ON WHAT FRONT END NEEDS, SEND NECESSARY OBJECTS 
+				
+		// sends array list of beacon signals to front end
+		request.setAttribute("myBeaconSignals", beaconSignals);
 		
 		RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/user_posts.jsp");
 		reqDispatcher.forward(request, response);

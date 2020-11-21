@@ -43,10 +43,12 @@ public class CommentRequest extends HttpServlet {
 			// call the beaconSignal again that now contains the added comment 
 			BeaconSignal newBeacon = db.getBeaconSignal(bs.get_postId()); 
 			
-			// IMPLEMENT WHEN WE KNOW FRONT END WANTS 
-			
+			// sends the beaconSignal object to front end -- contains arraylist of comments w the new comment added
+			request.setAttribute("BeaconSignal", newBeacon);
+						
 			reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/post_page.jsp");
 			reqDispatcher.forward(request, response);
+			
 			executor.shutdown();
 			while (!executor.isTerminated()) {
 				Thread.yield();

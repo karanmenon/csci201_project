@@ -24,7 +24,8 @@ public class BeaconSignalRequest extends HttpServlet {
 		
 		BeaconSignal bs = db.getBeaconSignal(postID); 
 		
-		// DEPENDING ON WHAT FRONT END NEEDS, FORWARD NECESSARY INFO 
+		// sends beaconSignal object to front end -- contains arraylist of comments 
+		request.setAttribute("BeaconSignal", bs);
 		
 		RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/post_page.jsp");
 		reqDispatcher.forward(request, response);
@@ -58,15 +59,14 @@ public class BeaconSignalRequest extends HttpServlet {
 			LocalDate timeStamp = LocalDate.now();
 			ArrayList<Comment> comments = new ArrayList<Comment>(); 
 			
-			BeaconSignal beacon = new BeaconSignal(userID, sb, title, postBody, LocalDateTime.now(), comments); 
-			db.addBeaconSignal(beacon);
+			BeaconSignal bs = new BeaconSignal(userID, sb, title, postBody, LocalDateTime.now(), comments); 
+			db.addBeaconSignal(bs);
+			
+			// sends the BeaconSignal object to front end -- contains the "new" beacon signal 
+			request.setAttribute("BeaconSignal", bs);
 			reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/post_page.jsp");
-					
 		}
-		
-		// TODO: sets correct attributes to be displayed by front end
 		reqDispatcher.forward(request, response);
-
 	}
 
 }

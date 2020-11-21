@@ -24,15 +24,13 @@ public class SubBeaconRequest extends HttpServlet{
 		response.setContentType("test/html"); 
 
 		String name = request.getParameter("name"); 
-		String category = request.getParameter("categories"); 
+		// String category = request.getParameter("categories"); 
 		
 		SubBeacon sb = db.getSubBeacon(name); 
 		
-		// THIS WILL BE CHANGED DEPENDING ON WHAT FROND END
-		// should we be sending the whole subBeacon object, or smaller objects within subBeacon
-		request.setAttribute("subBeacon", sb);
+		// sends the entire subBeacon obj to front end: contains arrayList of BeaconSignals (i.e. posts) 
+		request.setAttribute("SubBeacon", sb);
 		request.getRequestDispatcher("/disaster_thread.jsp").forward(request, response); 
-		
 	}
 	
 	// adds a subbeacon to the database
@@ -57,14 +55,14 @@ public class SubBeaconRequest extends HttpServlet{
 			
 			db.addSubBeacon(sb);
 			
-			// these will be changed depending on what frond end needs 
-			request.setAttribute("servlet_title", threadTitle);
-			request.setAttribute("servlet_categories", category);
+			ArrayList<SubBeacon> subBeacons = db.getSubBeacons(); 
 			
-			Cookie[] cookies = request.getCookies(); 
-			String username = cookies[0].getValue(); 
-			request.setAttribute("username", username); 
-					
+			// sends array list of subBeacons to frond end -- contains the new subBeacon
+			request.setAttribute("SubBeacons", subBeacons);
+			
+			// what happens when we need to display all subBeacons without the user "posting"? 
+			// what happens when we need to filter them by disaster? 
+			
 			reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/homepage.jsp");
 		}
 		reqDispatcher.forward(request, response);

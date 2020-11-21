@@ -1,6 +1,9 @@
 package Servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -54,8 +57,16 @@ public class UserRequest extends HttpServlet
 		}
 		else {
 			User user = db.getUser(username,password); 
-			request.setAttribute("user", user); 
-			request.getRequestDispatcher("/homepage.jsp").forward(request, response); 
+			
+			Cookie userCookie = new Cookie("username", user.get_username());
+			response.addCookie(userCookie);
+			
+			// gets array list of subbeacons to send to front end to display after the user has logged in
+			ArrayList<SubBeacon> subBeacons = db.getSubBeacons(); 
+			request.setAttribute("SubBeacons", subBeacons);
+			
+			RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/homepage.jsp");
+			reqDispatcher.forward(request, response);
 		}
 		
 	}
@@ -94,9 +105,11 @@ public class UserRequest extends HttpServlet
 			Cookie userCookie = new Cookie("username", user.get_username());
 			response.addCookie(userCookie);
 			
-			// for testing purposes, only sends the username, but will send the user object when working
-			request.setAttribute("username", user.get_username());
-			request.getRequestDispatcher("/homepage.jsp").include(request, response);
+			ArrayList<SubBeacon> subBeacons = db.getSubBeacons(); 
+			request.setAttribute("SubBeacons", subBeacons);
+			
+			RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/homepage.jsp");
+			reqDispatcher.forward(request, response);
 		}
 		
 	}

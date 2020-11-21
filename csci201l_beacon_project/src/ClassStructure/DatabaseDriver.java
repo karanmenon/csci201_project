@@ -170,8 +170,10 @@ public class DatabaseDriver {
 		return null; 
 	}
 	
-
-	
+	// TODO: returns an arrayList of all of the SubBeacons in DB
+	public ArrayList<SubBeacon> getSubBeacons() {
+		return null; 
+	}
 	
 	// get all the subBeacons that are affiliated with said tag: ie. flood, hurricane 
 	public ArrayList<SubBeacon> getSubBeaconbyTag(String tag) {
