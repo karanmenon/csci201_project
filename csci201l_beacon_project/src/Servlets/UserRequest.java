@@ -3,6 +3,7 @@ package Servlets;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -42,7 +43,7 @@ public class UserRequest extends HttpServlet
 			counter++; 
 		}
 		 // checks to see if the user exists according to inputted parameters
-		if (db.getUserId(username) != -1) {
+		if (!db.isValidUser(username, password)) {
 			error += "User doesn't exist. Please create an account."; 
 			counter++; 
 		}
@@ -78,7 +79,7 @@ public class UserRequest extends HttpServlet
 			counter++; 
 		}
 		// user already exists, need to create a new 
-		if (db.getUserId(username) != -1) {
+		if (db.getUserId(username) != null) {
 			error += "User already exists, please login to already existing account or create a new account"; 
 			counter++; 
 		}
@@ -89,6 +90,9 @@ public class UserRequest extends HttpServlet
 		else {
 			User user = new User(username, password); 
 			db.addUser(user);
+			
+			Cookie userCookie = new Cookie("username", user.get_username());
+			response.addCookie(userCookie);
 			
 			// for testing purposes, only sends the username, but will send the user object when working
 			request.setAttribute("username", user.get_username());
