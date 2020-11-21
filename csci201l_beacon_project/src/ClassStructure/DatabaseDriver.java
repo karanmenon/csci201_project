@@ -276,6 +276,7 @@ public class DatabaseDriver {
 	// returns all posts(BeaconSignals) affiliated with that user
 	public ArrayList<BeaconSignal> getMyBeaconSignals(String username) {
 		try(Connection connection = DriverManager.getConnection(serverConnection, user, pwd)){
+			
 			ArrayList<BeaconSignal> signals=new ArrayList<BeaconSignal>();
 			if(getUserId(username)==-1)
 				return null;
@@ -290,7 +291,7 @@ public class DatabaseDriver {
 					rs.beforeFirst();
 					while(rs.next())
 					{
-						signals.add(getBeaconSignal(rs.getInt(postID)));
+						signals.add(getBeaconSignal(rs.getInt("postID")));
 					}
 				}
 				else
