@@ -1,7 +1,10 @@
-package ClassStructure; 
+package ClassStructure;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+
+import org.graalvm.compiler.lir.alloc.lsra.ssa.SSALinearScanEliminateSpillMovePhase;
 
 public class DatabaseDriver {
 	
@@ -37,20 +40,37 @@ public class DatabaseDriver {
 		}
 		return 0; 
 	}
-	
-	// GET functions
-	public User getUser(String username, String password) {
+
+	public String getUsernameFromId(Integer userID)
+	{
 		try(Connection connection = DriverManager.getConnection(serverConnection, user, pwd)){
-			if (!(isValidUser(username, password)))
-				return null;
-			String sql="";
-		}
-		catch(SQLIntegrityConstraintViolationException e) {
+			String sql="SELECT username FROM Users WHERE userID="+userID;
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next())
+			{
+				return rs.getString("username");
+			}
+			else
+			{
+				System.out.println("No account with that username");
+				return "";
+			}
 		}
 		catch(SQLException e)
 		{
 			System.out.println("SQLException: " + e.getMessage());
 		}
+		return ""; 		
+	}
+	
+	// GET functions
+	public User getUser(String username, String password) {
+			if (!(isValidUser(username, password)))
+				return null;
+			User u= new User(username, password);
+			return u;
+
 
 	}
 	
@@ -82,18 +102,55 @@ public class DatabaseDriver {
 			String sql="SELECT disasterID FROM Disasters WHERE disasterName="+disasterTitle;
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
+			SubBeacon s= new SubBeacon(posts, rs.getString("disasterName"), rs.getString("disasterType"));;
 			if(rs.next())
 			{
-				rs.beforeFirst();
-				while(rs.next())
+
+				String sql1="SELECT * FROM Posts WHERE disasterID="+rs.getInt("disasterID") + (" ORDER BY timeStamps DESC");
+				PreparedStatement ps1=connection.prepareStatement(sql1);
+				ResultSet rs1=ps1.executeQuery();
+
+				if(rs1.next())
 				{
-					
+					rs1.beforeFirst();
+					while(rs1.next())
+					{
+						ArrayList<Comment> c= new ArrayList<Comment>();
+						BeaconSignal b= new BeaconSignal( (Integer) rs1.getInt("postID"), s, rs1.getString("postTitle"), rs1.getString("postContent"), (LocalDateTime) rs1.getObject("timeStamps"), c);
+						
+						String sql2="SELECT * FROM Comments WHERE postID="+rs1.getString("postID") + " ORDER BY timeStamps DESC";
+						PreparedStatement ps2=connection.prepareStatement(sql2);
+						ResultSet rs2=ps2.executeQuery();
+						if(rs2.next())
+						{
+							rs2.beforeFirst();
+							while(rs2.next())
+							{
+								Comment comm= new Comment(rs2.getString("commentContent"), getUsernameFromId(rs2.getInt("userID")), (LocalDateTime) rs2.getObject("timeStamps"), b);
+								c.add(comm);
+
+								//bod, username, time, bdpost
+							}
+
+						}
+						b.setComments(c);
+
+						posts.add(b);
+						//SubBeacon beacon, String title, String body, LocalDateTime time, ArrayList<Comment> comms
+
+					}
+
 				}
+				
+
 			}
 			else
 			{
+				System.out.println("You might be a soothsayer, but currently this disaster doesn't exist!");
 				return null;
 			}
+			s.setBeaconSignals(posts);
+			return s;
 			//SubBeacon(ArrayList<BeaconSignal> bSignals, String dis, String t) //dis=disaster name, t=tags
 		}
 		catch(SQLException e)
@@ -114,19 +171,7 @@ public class DatabaseDriver {
 		return null; 
 	}
 	
-	// checks to see if the username exists in the db table already  
-	public User isValidUser(String username) {
-		try(Connection connection = DriverManager.getConnection(serverConnection, user, pwd)){
-		}
-		catch(SQLIntegrityConstraintViolationException e) {
-		}
-		catch(SQLException e)
-		{
-			System.out.println("SQLException: " + e.getMessage());
-		}
-		return null;  
-	}
-	
+
 	
 	
 	// get all the subBeacons that are affiliated with said tag: ie. flood, hurricane 
@@ -197,7 +242,7 @@ public class DatabaseDriver {
 			Integer postScore = 0;
 			
 			// insert new post into Posts table
-			String sql2 = "INSERT INTO Posts (disasterID, userID, postScore, timeStamps, postContent) VALUES ('" 
+			String sql2 = "INSERT INTO Posts (disasterID, userID, postScore, timeStamps, postTitle, postContent) VALUES ('" 
 					+ disasterID + "', '" + beaconSignal.get_userId() + "', '" + postScore + "', '" + beaconSignal.get_timestamp() + "', '" + beaconSignal.get_postBody() + "')";
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate(sql2);
