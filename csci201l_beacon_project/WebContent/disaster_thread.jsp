@@ -77,12 +77,8 @@
 		
 		<div class="modal-content">
 			<div id="modal-content__header">Create New Post</div>
-			<form id="post-form-id" action="" method="POST">
+			<form id="post-form-id" action="BeaconSignalRequest" method="POST">
 				<input name="modal_title" class="form-control" type="text" id="post-title-input-id" placeholder="Title/Description">
-				<div class="post-location-input">
-					<input name="modal_city" class="form-control" type="text" id="post-city-input-id" placeholder="City">
-					<input name="modal_state" class="form-control" type="text" id="post-state-input-id" placeholder="State">
-				</div>
 				<textarea name="modal_info" class="form-control" id="post-info-input-id" placeholder="Info"></textarea>
 				<!-- <div id="post-img-upload">
 					<label for="img">Upload image:</label>
