@@ -66,17 +66,11 @@ public class DatabaseDriver {
 	
 	// GET functions
 	public User getUser(String username, String password) {
-		try(Connection connection = DriverManager.getConnection(serverConnection, user, pwd)){
 			if (!(isValidUser(username, password)))
 				return null;
-			String sql="";
-		}
-		catch(SQLIntegrityConstraintViolationException e) {
-		}
-		catch(SQLException e)
-		{
-			System.out.println("SQLException: " + e.getMessage());
-		}
+			User u= new User(username, password);
+			return u;
+
 
 	}
 	
