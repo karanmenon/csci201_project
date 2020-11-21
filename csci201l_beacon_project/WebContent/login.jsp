@@ -9,32 +9,7 @@
 	
 </head>
 <body>
-	<!-- Navbar -->
-	<nav class="navbar navbar-dark bg-dark">
-		<a class="navbar-brand" href="#">Beacon</a>
-		<div class="user">
-			<i class="fas fa-user"></i>
-			<i class="fas fa-caret-down"></i>
-
-			<!-- Display on click when user is logged-in -->
-			<div class="user__user-dropdown user__user-dropdown--logged-in">
-				<!-- PLACEHOLDER - Retrieve username dynamically -->
-				<div class="user-dropdown__username" id="username-id">Username</div>
-				<button type="button" class="btn user-dropdown__btn" id="my-posts-btn-id">My Posts</button>
-				<button type="button" class="btn user-dropdown__btn" id="logout-btn-id">
-					<i class="fas fa-sign-out-alt"></i>
-					Logout
-				</button>
-			</div>
-			<!-- How to make only this part display and guarantee users can't reach this page if already signed up? -->
-			<!-- Display on click when user is logged-out -->
-			<div class="user__user-dropdown user__user-dropdown--logged-out">
-				<button type="button" class="btn user-dropdown__btn" id="logout-btn-id">
-					<i class="fas fa-sign-in-alt"></i>
-					Login
-				</button>
-			</div>
-	</nav>
+	<jsp:include page="navbar.jsp"></jsp:include>
 
 
 	<!-- Main Content -->
