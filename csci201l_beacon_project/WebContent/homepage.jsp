@@ -73,7 +73,7 @@
 		
 		<div class="modal-content">
 			<div id="modal-content__header">Create New Disaster Thread</div>
-			<form id="thread-form-id" action="" method="POST">
+			<form id="thread-form-id" action="SubBeaconRequest" method="POST">
 				<input name="modal_title" class="form-control" type="text" id="thread-input-id" placeholder="Thread Title">
 				<div>
 					<label id="category-label-id" for="form__categories-id">Category:</label>
