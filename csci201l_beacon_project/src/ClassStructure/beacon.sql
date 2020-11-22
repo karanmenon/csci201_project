@@ -20,7 +20,7 @@ CREATE TABLE Posts(
     disasterID INT(15) NOT NULL,
     userID INT(10) NOT NULL, 
     postScore INT(10), 
-    timeStamps DATETIME) NOT NULL,
+    timeStamps (DATETIME) NOT NULL,
     postTitle VARCHAR(300) NOT NULL,
     postContent VARCHAR(1000) NOT NULL,
     PRIMARY KEY(postID), 

@@ -20,7 +20,7 @@
 				<div class="h1 mt-5 mb-5">Sign up</div>
 			</div>
 		</div>
-		<form class="row mb-4">
+		<form class="row mb-4" action="SignUpRequest" method ="POST">
 			<div class="col-12 text-danger mb-3">
 			</div>
 			<div class="form-group col-12">
@@ -40,7 +40,6 @@
 			<div class="col-12 mb-3">
 				<button type="submit" class="btn btn-primary">Log in</button>
 			</div>
-		</form>
 		</form>
 	</div>
 
