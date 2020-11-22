@@ -121,7 +121,8 @@ public class DatabaseDriver {
 					{
 						ArrayList<Comment> c= new ArrayList<Comment>();
 						//creates beacon signal to add to arraylist
-						BeaconSignal b= new BeaconSignal( (Integer) rs1.getInt("postID"), s, rs1.getString("postTitle"), rs1.getString("postContent"), (LocalDateTime) rs1.getObject("timeStamps"), c);
+						Timestamp ts = (Timestamp) rs1.getObject("timeStamps");
+						BeaconSignal b= new BeaconSignal( (Integer) rs1.getInt("postID"), s, rs1.getString("postTitle"), rs1.getString("postContent"), ts.toLocalDateTime(), c);
 						
 						//looks for comments for each beaconsignal
 						String sql2="SELECT * FROM Comments WHERE postID="+rs1.getString("postID") + " ORDER BY timeStamps DESC";
@@ -183,7 +184,8 @@ public class DatabaseDriver {
 				SubBeacon forum = getSubBeacon(disasterTitle);
 				ArrayList<Comment> c= new ArrayList<Comment>();
 				
-				BeaconSignal b= new BeaconSignal( (Integer) rs1.getInt("postID"), forum, rs1.getString("postTitle"), rs1.getString("postContent"), (LocalDateTime) rs1.getObject("timeStamps"), c);
+				Timestamp ts = (Timestamp) rs1.getObject("timeStamps");
+				BeaconSignal b= new BeaconSignal( (Integer) rs1.getInt("postID"), forum, rs1.getString("postTitle"), rs1.getString("postContent"), ts.toLocalDateTime(), c);
 				
 				String sql2="SELECT * FROM Comments WHERE postID="+postID + " ORDER BY timeStamps DESC";
 				PreparedStatement ps2=connection.prepareStatement(sql2);
@@ -279,7 +281,8 @@ public class DatabaseDriver {
 				
 				while(rs.next())
 				{
-					System.out.println("No BeaconSignals found. It's not the WiFi!");
+					//System.out.println("No BeaconSignals found. It's not the WiFi!");
+					signals.add(getBeaconSignal(rs.getInt("postID")));
 				}
 
 
