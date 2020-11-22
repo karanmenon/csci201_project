@@ -55,31 +55,8 @@
 			</div>
 		</div>
 		<% }}
-	else out.println("asdlfajdslkfjdlfj");%>
+	else out.println("No user posts found. Go make one!");%>
 
-		<div class="post">
-			<div class="post-username">
-				Username
-			</div>
-			<div class="post-title">
-				Post Title
-			</div>
-			<div class="post-comment">
-				<span><i class="fas fa-comment"></i> Comments</span>
-			</div>
-		</div>
-
-		<div class="post">
-			<div class="post-username">
-				Username
-			</div>
-			<div class="post-title">
-				Post Title
-			</div>
-			<div class="post-comment">
-				<span><i class="fas fa-comment"></i> Comments</span>
-			</div>
-		</div>
 
 	</div>
 
