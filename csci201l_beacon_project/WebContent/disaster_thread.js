@@ -21,10 +21,7 @@ $("#discard-btn-id").on("click", function(event) {
 // Function for resetting modal form
 function resetModal() {
 	$("#post-title-input-id").val("").removeClass("is-invalid");
-	$("#post-city-input-id").val("").removeClass("is-invalid");
-	$("#post-state-input-id").val("").removeClass("is-invalid");
 	$("#post-info-input-id").val("").removeClass("is-invalid");
-	$("#post-img-input-id").val("");
 }
 
 // Create new thread when submitted
@@ -33,14 +30,6 @@ $("#post-form-id").on("submit", function(event) {
 	// Check if input is empty
 	if ($("#post-title-input-id").val().trim() == "") {
 		$("#post-title-input-id").addClass("is-invalid");
-		error = true;
-	}
-	if ($("#post-city-input-id").val().trim() == "") {
-		$("#post-city-input-id").addClass("is-invalid");
-		error = true;
-	}
-	if ($("#post-state-input-id").val().trim() == "") {
-		$("#post-state-input-id").addClass("is-invalid");
 		error = true;
 	}
 	if ($("#post-info-input-id").val().trim() == "") {
@@ -58,12 +47,6 @@ $("#post-form-id").on("submit", function(event) {
 $("#post-form-id").on("input", function(event) {
 	if ($("#post-title-input-id").val().trim().length > 0) {
 		$("#post-title-input-id").removeClass("is-invalid");
-	}
-	if ($("#post-city-input-id").val().trim().length > 0) {
-		$("#post-city-input-id").removeClass("is-invalid");
-	}
-	if ($("#post-state-input-id").val().trim().length > 0) {
-		$("#post-state-input-id").removeClass("is-invalid");
 	}
 	if ($("#post-info-input-id").val().trim().length > 0) {
 		$("#post-info-input-id").removeClass("is-invalid");

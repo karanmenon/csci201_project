@@ -69,3 +69,10 @@ $(document).on("change", "#form__categories-id", function(event) {
 	$(".content").find("." + optionSelected.val()).css("display", "flex");
 	console.log(optionSelected.val());
 });
+
+// Clicking thread links to thread page
+$(".content").on("click", ".thread", function(event) {
+	// console.log($(event.target).closest(".thread").find(".thread-name").html().trim());
+	var threadName = $(event.target).closest(".thread").find(".thread-name").html().trim();
+	window.location.href = "disaster_thread.jsp?thread_name=" + threadName;
+});
