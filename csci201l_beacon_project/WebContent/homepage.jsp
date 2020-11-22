@@ -1,3 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+pageEncoding="ISO-8859-1" %>
+<%@ page import="ClassStructure.DatabaseDriver" %>
+<%@ page import="ClassStructure.SubBeacon" %>
+<%@ page import="java.util.ArrayList" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +17,13 @@
 </head>
 <body>
 	<jsp:include page="navbar.jsp"></jsp:include>
-
+	
+	<% 
+		DatabaseDriver driver = new DatabaseDriver();
+		ArrayList<SubBeacon> subBeacons = driver.getSubBeacons();
+	%>
+	
+	
 
 	<!-- Main Content -->
 	<div class="content-header">
@@ -30,6 +42,7 @@
 
 	<div class="content">
 		<!-- PLACEHOLDER - Threads will be created dynamically -->
+		<!--  
 		<div class="thread">
 			<div class="thread-tag">
 				Category
@@ -56,6 +69,18 @@
 				Name of Disaster Thread
 			</div>
 		</div>
+		-->
+	<% for (int i=0; i<subBeacons.size(); i++) { %> 
+		<div class="thread <%= subBeacons.get(i).get_tag() %>">
+			<div class="thread-tag">
+				<%= subBeacons.get(i).get_tag() %>
+			</div>
+			<div class="thread-name">
+				<%= subBeacons.get(i).get_disaster() %>
+			</div>
+		</div>
+	<% } %> 
+	
 
 	</div>
 
