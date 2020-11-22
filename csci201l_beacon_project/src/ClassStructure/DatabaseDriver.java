@@ -102,14 +102,14 @@ public class DatabaseDriver {
 	public SubBeacon getSubBeacon(String disasterTitle) {
 		try(Connection connection = DriverManager.getConnection(serverConnection, user, pwd)){
 			ArrayList<BeaconSignal> posts=new ArrayList<BeaconSignal>();
-			String sql="SELECT disasterID FROM Disasters WHERE disasterName='"+disasterTitle+"'";
+			String sql="SELECT * FROM Disasters WHERE disasterName='"+disasterTitle+"'";
 			PreparedStatement ps = connection.prepareStatement(sql,ResultSet.TYPE_SCROLL_SENSITIVE, 
                     ResultSet.CONCUR_UPDATABLE);
 			ResultSet rs = ps.executeQuery();
-			SubBeacon s= new SubBeacon(posts, rs.getString("disasterName"), rs.getString("disasterType")); //creates a subbeacon object, note that the beacon signals arent in yet
+			SubBeacon s;
 			if(rs.next()) //finds disaster info from title
 			{
-
+				s = new SubBeacon(posts, rs.getString("disasterName"), rs.getString("disasterType"));
 				String sql1="SELECT * FROM Posts WHERE disasterID="+rs.getInt("disasterID") + (" ORDER BY timeStamps DESC");
 				PreparedStatement ps1=connection.prepareStatement(sql1,ResultSet.TYPE_SCROLL_SENSITIVE, 
                         ResultSet.CONCUR_UPDATABLE);
