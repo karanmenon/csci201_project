@@ -53,8 +53,19 @@ $("#thread-input-id").on("input", function(event) {
 	}
 });
 
-// Change selected on click
+// Change selected of modal
 $(document).on("change", "#new-thread-categories", function(event) {
-var optionSelected = $("option:selected", this);
-	$("#new-thread-categories").css("border", "1px solid black");
+	var optionSelected = $("option:selected", this);
+	// $("#new-thread-categories").css("border", "1px solid black");
+});
+
+// Change selected of filter 
+$(document).on("change", "#form__categories-id", function(event) {
+	$(".thread").css("display", "none");
+	var optionSelected = $("option:selected", this);
+	// var selector = "'." + optionSelected.val() + "'";
+	// console.log(selector);
+	// $(".content").find(".Fire").css("display", "flex");
+	$(".content").find("." + optionSelected.val()).css("display", "flex");
+	console.log(optionSelected.val());
 });
