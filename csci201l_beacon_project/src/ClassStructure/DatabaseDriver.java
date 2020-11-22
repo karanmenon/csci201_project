@@ -171,12 +171,14 @@ public class DatabaseDriver {
 			PreparedStatement ps1=connection.prepareStatement(sql1);
 			ResultSet rs1=ps1.executeQuery();
 			
-			// get ID for Post
-			Integer postID = rs1.getInt("postID");
+			
 
 
 			if(rs1.next())
 			{
+				// get ID for Post
+				Integer postID = rs1.getInt("postID");
+				
 				// get the disasterID and disasterTitle for the Forum (SubBeacon) where the post is being made
 				Integer disasterID = rs1.getInt("disasterID");
 				String sqll = "SELECT disasterName FROM Disasters WHERE disasterID=" + disasterID + "";
