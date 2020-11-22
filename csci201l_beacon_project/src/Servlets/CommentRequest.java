@@ -37,15 +37,15 @@ public class CommentRequest extends HttpServlet {
 				
 			String comment = request.getParameter("comment_text");
 			System.out.println(comment);
-			String at = (String) request.getParameter("beaconSignal");
-			BeaconSignal bs = db.getBeaconSignal(Integer.parseInt(at));
+			String beaconTitle = (String) request.getParameter("beaconSignal");
+			BeaconSignal bs = db.getBeaconSignal(beaconTitle);
 			String username = (String) request.getParameter("username"); 
 			
 			Comment newCom = new Comment(comment, username, LocalDateTime.now(), bs); 
 			db.addComment(newCom);
 					
 			// call the beaconSignal again that now contains the added comment 
-			BeaconSignal newBeacon = db.getBeaconSignal(bs.get_postId()); 
+			BeaconSignal newBeacon = db.getBeaconSignal(bs.get_postTitle()); 
 			
 			// sends the beaconSignal object to front end -- contains arraylist of comments w the new comment added
 			request.setAttribute("BeaconSignal", newBeacon);

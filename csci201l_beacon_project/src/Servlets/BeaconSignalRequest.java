@@ -20,9 +20,9 @@ public class BeaconSignalRequest extends HttpServlet {
 		
 		response.setContentType("test/html"); 
 		
-		Integer postID = (Integer) request.getAttribute("postId"); 
+		String title = (String) request.getAttribute("title"); 
 		
-		BeaconSignal bs = db.getBeaconSignal(postID); 
+		BeaconSignal bs = db.getBeaconSignal(title); 
 		
 		// sends beaconSignal object to front end -- contains arraylist of comments 
 		request.setAttribute("BeaconSignal", bs);
