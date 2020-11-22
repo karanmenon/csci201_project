@@ -26,9 +26,6 @@ pageEncoding="ISO-8859-1" %>
 <body>
 	<jsp:include page="navbar.jsp"></jsp:include>
 
-	
-	
-
 	<!-- Main Content -->
 	<div class="content-header">
 		<!-- PLACEHOLDER - Retrieve name of disaster thread dynamically -->
@@ -77,6 +74,21 @@ pageEncoding="ISO-8859-1" %>
 			</div>
 		</div>
 		 -->
+ 	<% for (int i=0; i<posts.size(); i++) { %>
+		<div class="post">
+			<!--  Need to fix -->
+			<div class="post-username">
+				<%=// driver.getUsernameFromId(posts.get(i).get_userId()) %>
+			</div>
+			<div class="post-title">
+				<%= posts.get(i).get_postTitle() %>
+			</div>
+			<div class="post-comment">
+				<span><i class="fas fa-comment"></i> Comments</span>
+			</div>
+		</div>
+	<% } %>
+	
 	</div>
 
 	<!-- Modal -->
