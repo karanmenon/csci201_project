@@ -103,14 +103,16 @@ public class DatabaseDriver {
 		try(Connection connection = DriverManager.getConnection(serverConnection, user, pwd)){
 			ArrayList<BeaconSignal> posts=new ArrayList<BeaconSignal>();
 			String sql="SELECT disasterID FROM Disasters WHERE disasterName='"+disasterTitle+"'";
-			PreparedStatement ps = connection.prepareStatement(sql);
+			PreparedStatement ps = connection.prepareStatement(sql,ResultSet.TYPE_SCROLL_SENSITIVE, 
+                    ResultSet.CONCUR_UPDATABLE);
 			ResultSet rs = ps.executeQuery();
 			SubBeacon s= new SubBeacon(posts, rs.getString("disasterName"), rs.getString("disasterType")); //creates a subbeacon object, note that the beacon signals arent in yet
 			if(rs.next()) //finds disaster info from title
 			{
 
 				String sql1="SELECT * FROM Posts WHERE disasterID="+rs.getInt("disasterID") + (" ORDER BY timeStamps DESC");
-				PreparedStatement ps1=connection.prepareStatement(sql1);
+				PreparedStatement ps1=connection.prepareStatement(sql1,ResultSet.TYPE_SCROLL_SENSITIVE, 
+                        ResultSet.CONCUR_UPDATABLE);
 				ResultSet rs1=ps1.executeQuery();
 
 				if(rs1.next()) //finds posts associated with the disaster to create an arraylist of beaconsignals for the subbeacon
@@ -124,7 +126,8 @@ public class DatabaseDriver {
 						
 						//looks for comments for each beaconsignal
 						String sql2="SELECT * FROM Comments WHERE postID="+rs1.getString("postID") + " ORDER BY timeStamps DESC";
-						PreparedStatement ps2=connection.prepareStatement(sql2);
+						PreparedStatement ps2=connection.prepareStatement(sql2,ResultSet.TYPE_SCROLL_SENSITIVE, 
+		                        ResultSet.CONCUR_UPDATABLE);
 						ResultSet rs2=ps2.executeQuery();
 						if(rs2.next())
 						{
