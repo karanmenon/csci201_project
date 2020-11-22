@@ -13,10 +13,11 @@ public class BeaconSignal {
 	private LocalDateTime timestamp;
 	private ArrayList<Comment> comments; 
 	
-	public BeaconSignal(Integer id, SubBeacon beacon, String title, String body, 
+	public BeaconSignal(Integer p_id, Integer u_id, SubBeacon beacon, String title, String body, 
 			LocalDateTime time, ArrayList<Comment> comms) 
 	{
-		userId = id; 
+		postID = p_id;
+		userId = u_id; 
 		subBeacon = beacon; 
 		postTitle = title; 
 		postBody = body; 

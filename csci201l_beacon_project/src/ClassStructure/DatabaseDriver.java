@@ -122,7 +122,7 @@ public class DatabaseDriver {
 						ArrayList<Comment> c= new ArrayList<Comment>();
 						//creates beacon signal to add to arraylist
 						Timestamp ts = (Timestamp) rs1.getObject("timeStamps");
-						BeaconSignal b= new BeaconSignal( (Integer) rs1.getInt("postID"), s, rs1.getString("postTitle"), rs1.getString("postContent"), ts.toLocalDateTime(), c);
+						BeaconSignal b= new BeaconSignal((Integer) rs1.getInt("postID"), (Integer) rs1.getInt("userID"), s, rs1.getString("postTitle"), rs1.getString("postContent"), ts.toLocalDateTime(), c);
 						
 						//looks for comments for each beaconsignal
 						String sql2="SELECT * FROM Comments WHERE postID="+rs1.getString("postID") + " ORDER BY timeStamps DESC";
@@ -164,6 +164,60 @@ public class DatabaseDriver {
 		return null; 
 	}
 	
+	public BeaconSignal getBeaconSignal(Integer postID) {
+		try(Connection connection = DriverManager.getConnection(serverConnection, user, pwd)){
+			String sql1="SELECT * FROM Posts WHERE postID="+postID;
+			PreparedStatement ps1=connection.prepareStatement(sql1);
+			ResultSet rs1=ps1.executeQuery();
+
+
+			if(rs1.next())
+			{
+				
+				// get the disasterID and disasterTitle for the Forum (SubBeacon) where the post is being made
+				Integer disasterID = rs1.getInt("disasterID");
+				String sqll = "SELECT disasterName FROM Disasters WHERE disasterID=" + disasterID + "";
+				PreparedStatement pss = connection.prepareStatement(sqll);
+				ResultSet rss = pss.executeQuery();
+				rss.next();
+				String disasterTitle = rss.getString("disasterName");
+				
+				SubBeacon forum = getSubBeacon(disasterTitle);
+				ArrayList<Comment> c= new ArrayList<Comment>();
+				
+				Timestamp ts = (Timestamp) rs1.getObject("timeStamps");
+				BeaconSignal b= new BeaconSignal( (Integer) rs1.getInt("postID"), (Integer) rs1.getInt("userID"), forum, rs1.getString("postTitle"), rs1.getString("postContent"), ts.toLocalDateTime(), c);
+				
+				String sql2="SELECT * FROM Comments WHERE postID="+postID + " ORDER BY timeStamps DESC";
+				PreparedStatement ps2=connection.prepareStatement(sql2);
+				ResultSet rs2=ps2.executeQuery();
+
+				while(rs2.next())
+				{
+					Timestamp timestamp = (Timestamp) rs2.getObject("timeStamps");
+					Comment comm= new Comment(rs2.getString("commentContent"), getUsernameFromId(rs2.getInt("userID")),  ts.toLocalDateTime(), b);
+					c.add(comm);
+	
+						//bod, username, time, bdpost
+				}
+	
+				b.setComments(c);
+				return b;
+			}
+			else
+			{
+				System.out.println("Post not found! Doesn't mean you can't create one!");
+				return null;
+			}
+		}
+		catch(SQLException e)
+		{
+			System.out.println("SQLException: " + e.getMessage());		
+		}
+		return null; 
+	}
+	
+	// overloaded to allow searching by posttitle
 	public BeaconSignal getBeaconSignal(String postTitle) {
 		try(Connection connection = DriverManager.getConnection(serverConnection, user, pwd)){
 			// get Post
@@ -191,7 +245,7 @@ public class DatabaseDriver {
 				ArrayList<Comment> c= new ArrayList<Comment>();
 				
 				Timestamp ts = (Timestamp) rs1.getObject("timeStamps");
-				BeaconSignal b= new BeaconSignal( (Integer) rs1.getInt("postID"), forum, rs1.getString("postTitle"), rs1.getString("postContent"), ts.toLocalDateTime(), c);
+				BeaconSignal b= new BeaconSignal( (Integer) rs1.getInt("postID"), (Integer) rs1.getInt("userID"), forum, rs1.getString("postTitle"), rs1.getString("postContent"), ts.toLocalDateTime(), c);
 				
 				String sql2="SELECT * FROM Comments WHERE postID="+postID + " ORDER BY timeStamps DESC";
 				PreparedStatement ps2=connection.prepareStatement(sql2);

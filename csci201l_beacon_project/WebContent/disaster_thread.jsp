@@ -81,7 +81,7 @@ pageEncoding="ISO-8859-1" %>
  	<% for (int i=0; posts != null && i<posts.size(); i++) { %>
 		<div class="post" onclick = "location.href = './post_page.jsp?post_id=<%= posts.get(i).get_postId() %>';">
 			<div class="post-username">
-				<%= posts.get(i).get_userId() %>
+				<%= driver.getUsernameFromId(posts.get(i).get_userId()) %>
 			</div>
 			<div class="post-title">
 				<%= posts.get(i).get_postTitle() %>
