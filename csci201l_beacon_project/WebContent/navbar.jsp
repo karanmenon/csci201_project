@@ -7,7 +7,7 @@
 			<% Cookie[] cookies = request.getCookies();
 			boolean loggedIn = false;
 			Cookie loginCookie = null;
-			for(int i = 0; i < cookies.length; i++)
+			for(int i = 0; cookies != null && i < cookies.length; i++)
 			{
 				Cookie cookie = cookies[i];
 	            if(cookies[i].getName().equals("username"))
