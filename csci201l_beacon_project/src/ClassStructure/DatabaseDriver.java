@@ -164,16 +164,19 @@ public class DatabaseDriver {
 		return null; 
 	}
 	
-	public BeaconSignal getBeaconSignal(Integer postID) {
+	public BeaconSignal getBeaconSignal(String postTitle) {
 		try(Connection connection = DriverManager.getConnection(serverConnection, user, pwd)){
-			String sql1="SELECT * FROM Posts WHERE postID="+postID;
+			// get Post
+			String sql1="SELECT * FROM Posts WHERE postTitle= '" + postTitle + "'";
 			PreparedStatement ps1=connection.prepareStatement(sql1);
 			ResultSet rs1=ps1.executeQuery();
+			
+			// get ID for Post
+			Integer postID = rs1.getInt("postID");
 
 
 			if(rs1.next())
 			{
-				
 				// get the disasterID and disasterTitle for the Forum (SubBeacon) where the post is being made
 				Integer disasterID = rs1.getInt("disasterID");
 				String sqll = "SELECT disasterName FROM Disasters WHERE disasterID=" + disasterID + "";
@@ -277,14 +280,14 @@ public class DatabaseDriver {
 				return null;
 			else
 			{
-				String sql="SELECT postID FROM Posts WHERE userID="+getUserId(username);
+				String sql="SELECT postTitle FROM Posts WHERE userID="+getUserId(username);
 				PreparedStatement ps=connection.prepareStatement(sql);
 				ResultSet rs=ps.executeQuery();
 				
 				while(rs.next())
 				{
 					//System.out.println("No BeaconSignals found. It's not the WiFi!");
-					signals.add(getBeaconSignal(rs.getInt("postID")));
+					signals.add(getBeaconSignal(rs.getString("postTitle")));
 				}
 
 
@@ -356,6 +359,15 @@ public class DatabaseDriver {
 			Integer postID = rss.getInt("postID");
 			beaconSignal.set_postId(postID);
 			
+		}
+		catch(SQLIntegrityConstraintViolationException e) {
+			// postTitle has already been taken
+			if(e.getMessage().contains("Duplicate entry")) {
+				if(e.getMessage().contains("for key 'postTitle'")) {
+					System.out.println("That post title is already taken. Please try again with a "
+							+ "different post title.");
+				}
+			}
 		}
 		catch(SQLException e) {
 			System.out.println("SQLException: " + e.getMessage());
