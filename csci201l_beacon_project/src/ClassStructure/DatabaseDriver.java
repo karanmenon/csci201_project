@@ -174,9 +174,19 @@ public class DatabaseDriver {
 
 			if(rs1.next())
 			{
-
+				
+				// get the disasterID and disasterTitle for the Forum (SubBeacon) where the post is being made
+				Integer disasterID = rs1.getInt("disasterID");
+				String sqll = "SELECT disasterName FROM Disasters WHERE disasterID=" + disasterID + "";
+				PreparedStatement pss = connection.prepareStatement(sqll);
+				ResultSet rss = pss.executeQuery();
+				rss.next();
+				String disasterTitle = rss.getString("disasterName");
+				
+				SubBeacon forum = getSubBeacon(disasterTitle);
 				ArrayList<Comment> c= new ArrayList<Comment>();
-				BeaconSignal b= new BeaconSignal( (Integer) rs1.getInt("postID"), s, rs1.getString("postTitle"), rs1.getString("postContent"), (LocalDateTime) rs1.getObject("timeStamps"), c);
+				
+				BeaconSignal b= new BeaconSignal( (Integer) rs1.getInt("postID"), forum, rs1.getString("postTitle"), rs1.getString("postContent"), (LocalDateTime) rs1.getObject("timeStamps"), c);
 				
 				String sql2="SELECT * FROM Comments WHERE postID="+postID + " ORDER BY timeStamps DESC";
 				PreparedStatement ps2=connection.prepareStatement(sql2);
@@ -296,7 +306,7 @@ public class DatabaseDriver {
 				}
 				else
 				{
-					System.out.println("No BeaconSignals found. It's not the WiFi!")
+					System.out.println("No BeaconSignals found. It's not the WiFi!");
 				}
 				return signals;
 			}
