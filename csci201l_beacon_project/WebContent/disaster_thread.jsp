@@ -35,7 +35,7 @@ pageEncoding="ISO-8859-1" %>
 		<!-- PLACEHOLDER - Retrieve name of disaster thread dynamically -->
 		<div class="filters-and-button">
 			<h1 class="thread-name"><%= threadName %></h1>
-			<button type="button" id="report-btn-id" class="btn btn-danger">Report</button>
+			<button type="button" id="report-btn-id" class="btn btn-danger">Create a Post</button>
 		</div>
 	</div>
 
@@ -79,7 +79,7 @@ pageEncoding="ISO-8859-1" %>
 		</div>
 		 -->
  	<% for (int i=0; posts != null && i<posts.size(); i++) { %>
-		<div class="post">
+		<div class="post" onclick = "location.href = './post_page.jsp?post_id=<%= posts.get(i).get_postId() %>';">
 			<div class="post-username">
 				<%= posts.get(i).get_userId() %>
 			</div>

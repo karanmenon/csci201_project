@@ -132,7 +132,8 @@ public class DatabaseDriver {
 	
 						while(rs2.next())
 						{
-						Comment comm= new Comment(rs2.getString("commentContent"), getUsernameFromId(rs2.getInt("userID")), (LocalDateTime) rs2.getObject("timeStamps"), b);
+							ts = (Timestamp) rs2.getObject("timeStamps");
+						Comment comm= new Comment(rs2.getString("commentContent"), getUsernameFromId(rs2.getInt("userID")), (LocalDateTime) ts.toLocalDateTime(), b);
 						c.add(comm);
 
 						//bod, username, time, bdpost
@@ -193,7 +194,8 @@ public class DatabaseDriver {
 
 				while(rs2.next())
 				{
-					Comment comm= new Comment(rs2.getString("commentContent"), getUsernameFromId(rs2.getInt("userID")), (LocalDateTime) rs2.getObject("timeStamps"), b);
+					ts = (Timestamp) rs2.getObject("timeStamps");
+					Comment comm= new Comment(rs2.getString("commentContent"), getUsernameFromId(rs2.getInt("userID")), (LocalDateTime) ts.toLocalDateTime(), b);
 					c.add(comm);
 	
 						//bod, username, time, bdpost
@@ -365,7 +367,7 @@ public class DatabaseDriver {
 			
 			// insert new comment into Comments table
 			String sql2 = "INSERT INTO Comments (userID, postID, commentContent, timeStamps) VALUES (" 
-					+ comment.get_author() + ", " + post_id + ", '" + comment.get_body() + "', '" + comment.get_time() + "')";
+					+ getUserId(comment.get_author()) + ", " + post_id + ", '" + comment.get_body() + "', '" + comment.get_time() + "')";
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate(sql2);
 			

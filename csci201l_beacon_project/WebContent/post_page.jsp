@@ -1,3 +1,22 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+pageEncoding="ISO-8859-1" %>
+<%@ page import="ClassStructure.DatabaseDriver" %>
+<%@ page import="ClassStructure.Comment" %>
+<%@ page import="ClassStructure.SubBeacon" %>
+<%@ page import="ClassStructure.BeaconSignal" %>
+<%@ page import="java.util.ArrayList" %>
+
+<%
+	BeaconSignal post = null;
+	DatabaseDriver driver = new DatabaseDriver();
+	int postID = -1;
+	if(request.getParameter("post_id") != null)
+	{
+		postID = Integer.parseInt(request.getParameter("post_id"));
+		post = driver.getBeaconSignal(postID);
+	}
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,8 +32,45 @@
 	<jsp:include page="navbar.jsp"></jsp:include>
 
 	<!-- Post Display -->
-	<!-- PLACEHOLDER - content will be dynamically created -->
+	<% if(post != null) {%>
 	<div class="post">
+		<div class="post-username">Posted by: <%= driver.getUsernameFromId(post.get_userId()) %></div>
+		<div class="post-title"><%= post.get_postTitle() %></div>
+		<div class="post-info"><%= post.get_postBody() %></div>
+		<%
+		Cookie[] cookies = request.getCookies();
+			boolean loggedIn = false;
+			Cookie loginCookie = null;
+			for(int i = 0; cookies != null && i < cookies.length; i++)
+			{
+				Cookie cookie = cookies[i];
+	            if(cookies[i].getName().equals("username"))
+	            {
+	            	loggedIn = true;
+	            	loginCookie = cookies[i];
+	            }
+			}
+			if(loggedIn)
+			{%>
+		<form action="CommentRequest" method="POST" id="comment-form-id">
+			<input name="comment_text" id="comment-input-id" placeholder="Comment">
+			<input type="hidden" name="beaconSignal" value="1">
+			<input type="hidden" name="username" value="<%= loginCookie.getValue()%>">
+		</form>
+		<%} %>
+		<div class="comments">
+			<% ArrayList<Comment> comments = post.get_comments();
+			for(int i = 0; comments != null && i < comments.size(); i++)
+			{%>
+			<div class="comment-block">
+				<span class="comment-username"><%= comments.get(i).get_author() %></span>
+				<span class="comment"><%= comments.get(i).get_body() %></span>
+			</div>
+			<%} %>
+		</div>
+	<% } %>
+	<!-- PLACEHOLDER - content will be dynamically created -->
+	<!-- <div class="post">
 		<div class="post-username">Posted by: Username</div>
 		<div class="post-title">Title</div>
 		<div class="post-info">Info Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info InfoInfo Info Info</div>
@@ -35,7 +91,7 @@
 				<span class="comment">Comment comment comment comment</span>
 			</div>
 		</div>
-	</div>
+	</div> -->
 		
 	<!-- Import Font Awesome library -->
 	<script src="https://kit.fontawesome.com/e558bbfafc.js" crossorigin="anonymous"></script>
