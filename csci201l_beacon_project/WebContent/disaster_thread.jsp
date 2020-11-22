@@ -76,9 +76,8 @@ pageEncoding="ISO-8859-1" %>
 		 -->
  	<% for (int i=0; i<posts.size(); i++) { %>
 		<div class="post">
-			<!--  Need to fix -->
 			<div class="post-username">
-				<%=// driver.getUsernameFromId(posts.get(i).get_userId()) %>
+				<%= posts.get(i).get_userId() %>
 			</div>
 			<div class="post-title">
 				<%= posts.get(i).get_postTitle() %>
