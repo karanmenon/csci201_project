@@ -1,3 +1,17 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+pageEncoding="ISO-8859-1" %>
+<%@ page import="ClassStructure.DatabaseDriver" %>
+<%@ page import="ClassStructure.SubBeacon" %>
+<%@ page import="ClassStructure.BeaconSignal" %>
+<%@ page import="java.util.ArrayList" %>
+
+<%
+	String threadName = request.getParameter("thread_name");
+	DatabaseDriver driver = new DatabaseDriver();
+	SubBeacon thread = driver.getSubBeacon(threadName);
+	ArrayList<BeaconSignal> posts = thread.get_beaconSignals();
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,12 +26,16 @@
 <body>
 	<jsp:include page="navbar.jsp"></jsp:include>
 
+	<% for (int i=0; i<posts.size(); i++) { %>
+		<div><%= posts.get(i) %></div>
+	<% } %>
+	
 
 	<!-- Main Content -->
 	<div class="content-header">
 		<!-- PLACEHOLDER - Retrieve name of disaster thread dynamically -->
 		<div class="filters-and-button">
-			<h1 class="thread-name">Thread Name</h1>
+			<h1 class="thread-name"><%= threadName %></h1>
 			<button type="button" id="report-btn-id" class="btn btn-danger">Report</button>
 		</div>
 	</div>
@@ -70,6 +88,7 @@
 		<div class="modal-content">
 			<div id="modal-content__header">Create New Post</div>
 			<form id="post-form-id" action="BeaconSignalRequest" method="POST">
+				<input type="hidden" name="disaster_title" value="<%=threadName%>">
 				<input name="modal_title" class="form-control" type="text" id="post-title-input-id" placeholder="Title/Description">
 				<textarea name="modal_info" class="form-control" id="post-info-input-id" placeholder="Info"></textarea>
 				<!-- <div id="post-img-upload">

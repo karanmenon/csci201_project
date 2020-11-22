@@ -4,6 +4,7 @@ pageEncoding="ISO-8859-1" %>
 <%@ page import="ClassStructure.SubBeacon" %>
 <%@ page import="java.util.ArrayList" %>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,13 +18,10 @@ pageEncoding="ISO-8859-1" %>
 </head>
 <body>
 	<jsp:include page="navbar.jsp"></jsp:include>
-	
-	<% 
-		DatabaseDriver driver = new DatabaseDriver();
-		ArrayList<SubBeacon> subBeacons = driver.getSubBeacons();
-	%>
-	
-	
+<% 
+	DatabaseDriver driver = new DatabaseDriver();
+	ArrayList<SubBeacon> subBeacons = driver.getSubBeacons();
+%>
 
 	<!-- Main Content -->
 	<div class="content-header">

@@ -49,7 +49,8 @@ public class BeaconSignalRequest extends HttpServlet {
 		
 		else {
 			String username = request.getCookies()[0].getValue();
-			Integer userID = db.getUserId(username); 
+//			TEMP fix
+			Integer userID = db.getUserId("a"); 
 			
 			// change this if we have the SubBeacon object already 
 			String subBeaconTitle = request.getParameter("disaster_title"); 
