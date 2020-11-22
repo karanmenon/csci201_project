@@ -337,7 +337,7 @@ public class DatabaseDriver {
 			
 			// insert new post into Posts table
 			String sql2 = "INSERT INTO Posts (disasterID, userID, postScore, timeStamps, postTitle, postContent) VALUES ('" 
-					+ disasterID + "', '" + beaconSignal.get_userId() + "', '" + postScore + "', '" + beaconSignal.get_timestamp() + "', '" + beaconSignal.get_postBody() + "')";
+					+ disasterID + "', '" + beaconSignal.get_userId() + "', '" + postScore + "', '" + beaconSignal.get_timestamp() + "', '" + beaconSignal.get_postTitle() + "', '" + beaconSignal.get_postBody() + "')";
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate(sql2);
 			
