@@ -21,7 +21,7 @@ CREATE TABLE Posts(
     userID INT(10) NOT NULL, 
     postScore INT(10), 
     timeStamps DATETIME NOT NULL,
-    postTitle VARCHAR(300) NOT NULL,
+    postTitle VARCHAR(300) NOT NULL unique,
     postContent VARCHAR(1000) NOT NULL,
     PRIMARY KEY(postID), 
     FOREIGN KEY(disasterID) REFERENCES Disasters(disasterID),

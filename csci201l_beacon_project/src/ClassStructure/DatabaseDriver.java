@@ -300,6 +300,8 @@ public class DatabaseDriver {
 	
 
 	//Erin's code
+	
+	
 		
 	// ADD functions - timeStamps should be created for each object like this: LocalDateTime time = LocalDateTime.now();
 	
@@ -345,6 +347,14 @@ public class DatabaseDriver {
 					+ disasterID + "', '" + beaconSignal.get_userId() + "', '" + postScore + "', '" + beaconSignal.get_timestamp() + "', '" + beaconSignal.get_postTitle() + "', '" + beaconSignal.get_postBody() + "')";
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate(sql2);
+			
+			// get the postID from the db and set the postID for the Beacon Signal object
+			String sql3 = "SELECT postID FROM Posts WHERE postTitle = '" + beaconSignal.get_postTitle() + "'";
+			PreparedStatement pss = connection.prepareStatement(sql3);
+			ResultSet rss = pss.executeQuery();
+			rs.next();
+			Integer postID = rss.getInt("postID");
+			beaconSignal.set_postId(postID);
 			
 		}
 		catch(SQLException e) {
