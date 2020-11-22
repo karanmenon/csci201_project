@@ -25,20 +25,23 @@ public class SubByTagRequest extends HttpServlet {
 	public void service(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
+		response.setContentType("text/html");
+		
 		String tag = request.getParameter("categories"); 
+		
+		System.out.println("tag = " + tag); 
 		ArrayList<SubBeacon> SubBeacons; 
 		
 		// tag wasn't specified, so sends back to homepage 
-		if (tag.contentEquals("")) {
+		if (tag.contentEquals("All") || tag.contentEquals("")) {
 			SubBeacons = db.getSubBeacons(); 
 		}
 		else {
 			SubBeacons = db.getSubBeaconbyTag(tag); 			
 		}
 		
-		request.setAttribute("SubBeacons", SubBeacons);
+		request.setAttribute("SubBeaconsByTag", SubBeacons);
 
-		
 		RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/homepage.jsp");
 		reqDispatcher.forward(request, response);
 	}

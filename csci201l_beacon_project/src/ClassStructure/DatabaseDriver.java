@@ -103,19 +103,20 @@ public class DatabaseDriver {
 		try(Connection connection = DriverManager.getConnection(serverConnection, user, pwd)){
 			ArrayList<BeaconSignal> posts=new ArrayList<BeaconSignal>();
 			String sql="SELECT disasterID FROM Disasters WHERE disasterName='"+disasterTitle+"'";
-			PreparedStatement ps = connection.prepareStatement(sql);
+			PreparedStatement ps = connection.prepareStatement(sql,ResultSet.TYPE_SCROLL_SENSITIVE, 
+                    ResultSet.CONCUR_UPDATABLE);
 			ResultSet rs = ps.executeQuery();
 			SubBeacon s= new SubBeacon(posts, rs.getString("disasterName"), rs.getString("disasterType")); //creates a subbeacon object, note that the beacon signals arent in yet
 			if(rs.next()) //finds disaster info from title
 			{
 
 				String sql1="SELECT * FROM Posts WHERE disasterID="+rs.getInt("disasterID") + (" ORDER BY timeStamps DESC");
-				PreparedStatement ps1=connection.prepareStatement(sql1);
+				PreparedStatement ps1=connection.prepareStatement(sql1,ResultSet.TYPE_SCROLL_SENSITIVE, 
+                        ResultSet.CONCUR_UPDATABLE);
 				ResultSet rs1=ps1.executeQuery();
 
-				if(rs1.next()) //finds posts associated with the disaster to create an arraylist of beaconsignals for the subbeacon
-				{
-					rs1.beforeFirst();
+
+					
 					while(rs1.next())
 					{
 						ArrayList<Comment> c= new ArrayList<Comment>();
@@ -124,29 +125,25 @@ public class DatabaseDriver {
 						
 						//looks for comments for each beaconsignal
 						String sql2="SELECT * FROM Comments WHERE postID="+rs1.getString("postID") + " ORDER BY timeStamps DESC";
-						PreparedStatement ps2=connection.prepareStatement(sql2);
+						PreparedStatement ps2=connection.prepareStatement(sql2,ResultSet.TYPE_SCROLL_SENSITIVE, 
+		                        ResultSet.CONCUR_UPDATABLE);
 						ResultSet rs2=ps2.executeQuery();
-						if(rs2.next())
+	
+						while(rs2.next())
 						{
-							rs2.beforeFirst();
-							while(rs2.next())
-							{
-								Comment comm= new Comment(rs2.getString("commentContent"), getUsernameFromId(rs2.getInt("userID")), (LocalDateTime) rs2.getObject("timeStamps"), b);
-								c.add(comm);
+						Comment comm= new Comment(rs2.getString("commentContent"), getUsernameFromId(rs2.getInt("userID")), (LocalDateTime) rs2.getObject("timeStamps"), b);
+						c.add(comm);
 
-								//bod, username, time, bdpost
-							}
-
+						//bod, username, time, bdpost
 						}
+
 						b.setComments(c); //updates comments arraylist
 
 						posts.add(b);
 						//SubBeacon beacon, String title, String body, LocalDateTime time, ArrayList<Comment> comms
 
 					}
-
-				}
-				
+	
 
 			}
 			else
@@ -192,18 +189,14 @@ public class DatabaseDriver {
 				PreparedStatement ps2=connection.prepareStatement(sql2);
 				ResultSet rs2=ps2.executeQuery();
 
-				if(rs2.next())
+				while(rs2.next())
 				{
-					rs2.beforeFirst();
-					while(rs2.next())
-					{
-						Comment comm= new Comment(rs2.getString("commentContent"), getUsernameFromId(rs2.getInt("userID")), (LocalDateTime) rs2.getObject("timeStamps"), b);
-						c.add(comm);
+					Comment comm= new Comment(rs2.getString("commentContent"), getUsernameFromId(rs2.getInt("userID")), (LocalDateTime) rs2.getObject("timeStamps"), b);
+					c.add(comm);
 	
 						//bod, username, time, bdpost
-					}
-	
 				}
+	
 				b.setComments(c);
 				return b;
 			}
@@ -228,19 +221,13 @@ public class DatabaseDriver {
 			ResultSet rs=ps.executeQuery();
 			ArrayList<SubBeacon> subList=new ArrayList<SubBeacon>();
 
-			if(rs.next())
-			{
-				rs.beforeFirst();
-				while(rs.next())
-				{
-					subList.add(getSubBeacon(rs.getString("disasterName")));
-				}
 
-			}
-			else
+			while(rs.next())
 			{
-				System.out.println("No SubBeacons yet. Use our site more!");
+				subList.add(getSubBeacon(rs.getString("disasterName")));
 			}
+
+			
 			return subList;
 		}
 		catch(SQLException e)
@@ -261,18 +248,12 @@ public class DatabaseDriver {
 
 			ArrayList<SubBeacon> subList=new ArrayList<SubBeacon>();
 
-			if(rs.next())
+			while(rs.next())
 			{
-				rs.beforeFirst();
-				while(rs.next())
-				{
-					subList.add(getSubBeacon(rs.getString("disasterName")));
-				}
+				subList.add(getSubBeacon(rs.getString("disasterName")));
 			}
-			else
-			{
-				System.out.println("No subBeacons for that tag");
-			}
+			
+
 			return subList;
 
 		}
@@ -296,18 +277,12 @@ public class DatabaseDriver {
 				PreparedStatement ps=connection.prepareStatement(sql);
 				ResultSet rs=ps.executeQuery();
 				
-				if(rs.next())
-				{
-					rs.beforeFirst();
-					while(rs.next())
-					{
-						signals.add(getBeaconSignal(rs.getInt("postID")));
-					}
-				}
-				else
+				while(rs.next())
 				{
 					System.out.println("No BeaconSignals found. It's not the WiFi!");
 				}
+
+
 				return signals;
 			}
 		}

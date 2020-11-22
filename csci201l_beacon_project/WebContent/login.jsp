@@ -1,8 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@ page import="java.util.*"
-%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +22,7 @@
 				<div class="h1 mt-5 mb-5">Log in</div>
 			</div>
 		</div>
-		<form class="row mb-4" action = "UserRequest" method = "GET">
+		<form class="row mb-4" action = "LoginRequest" method = "POST">
 			<div class="col-12 text-danger mb-3">
 			</div>
 			<div class="form-group col-12">
