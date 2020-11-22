@@ -21,7 +21,7 @@
 			<div class="user__user-dropdown">
 				<!-- PLACEHOLDER - Retrieve username dynamically -->
 				<div class="user-dropdown__username" id="username-id"><%= loginCookie.getValue() %></div>
-				<button type="button" class="btn user-dropdown__btn" id="my-posts-btn-id">My Posts</button>
+				<button type="button" class="btn user-dropdown__btn" onclick="document.location='user_posts.jsp'" id="my-posts-btn-id">My Posts</button>
 				<form action = "LogOutRequest" method = "GET">
 					<button type="submit" class="btn user-dropdown__btn" id="logout-btn-id">
 						<i class="fas fa-sign-out-alt"></i>
