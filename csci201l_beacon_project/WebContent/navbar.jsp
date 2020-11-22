@@ -1,6 +1,6 @@
 <!-- Navbar -->
 	<nav class="navbar navbar-dark bg-dark">
-		<a class="navbar-brand" href="#">Beacon</a>
+		<a class="navbar-brand" href="./homepage.jsp">Beacon</a>
 		<div class="user">
 			<i class="fas fa-user"></i>
 			<i class="fas fa-caret-down"></i>

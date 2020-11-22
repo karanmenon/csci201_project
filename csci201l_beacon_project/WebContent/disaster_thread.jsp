@@ -9,7 +9,11 @@ pageEncoding="ISO-8859-1" %>
 	String threadName = request.getParameter("thread_name");
 	DatabaseDriver driver = new DatabaseDriver();
 	SubBeacon thread = driver.getSubBeacon(threadName);
-	ArrayList<BeaconSignal> posts = thread.get_beaconSignals();
+	ArrayList<BeaconSignal> posts = null;
+	if(thread != null)
+	{
+	posts = thread.get_beaconSignals();
+	}
 %>
 
 <!DOCTYPE html>
@@ -74,7 +78,7 @@ pageEncoding="ISO-8859-1" %>
 			</div>
 		</div>
 		 -->
- 	<% for (int i=0; i<posts.size(); i++) { %>
+ 	<% for (int i=0; posts != null && i<posts.size(); i++) { %>
 		<div class="post">
 			<div class="post-username">
 				<%= posts.get(i).get_userId() %>
@@ -86,7 +90,11 @@ pageEncoding="ISO-8859-1" %>
 				<span><i class="fas fa-comment"></i> Comments</span>
 			</div>
 		</div>
-	<% } %>
+	<% } 
+		if(posts == null)
+		{%>
+			No posts found. Go make some!
+		<%}%>
 	
 	</div>
 
