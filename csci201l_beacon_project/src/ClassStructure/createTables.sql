@@ -6,7 +6,6 @@ CREATE TABLE Users (
     userID int(10) not null primary key AUTO_INCREMENT,
     username varchar(30) not null unique,
     password varchar(90) not null,
-    userPoints int(10)
 );
 
 CREATE TABLE Disasters (
