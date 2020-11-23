@@ -10,8 +10,13 @@
 </head>
 <body>
 	<jsp:include page="navbar.jsp"></jsp:include>
-
-
+ 	<% 	
+ 		String err = (String) request.getAttribute("signUpError");  
+ 		if (err != null) {
+ 			out.println(err); 
+ 		}
+ 	
+ 	%>
 	<!-- Main Content -->
 	
 	<div class="container">

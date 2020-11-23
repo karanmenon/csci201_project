@@ -46,7 +46,7 @@ public class LoginRequest extends HttpServlet {
 		}
 
 		if (counter > 0) {
-			request.setAttribute("user_error_message", error); 
+			request.setAttribute("LoginErrorMessage", error); 
 			request.getRequestDispatcher("/login.jsp").include(request, response); 
 		}
 		else {

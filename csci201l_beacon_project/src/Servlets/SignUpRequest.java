@@ -44,7 +44,7 @@ public class SignUpRequest extends HttpServlet
 			counter++; 
 		}
 		if (counter > 0) {
-			request.setAttribute("user_error_message", error); 
+			request.setAttribute("signUpError", error); 
 			request.getRequestDispatcher("/signup.jsp").include(request, response); 
 		}
 		else {

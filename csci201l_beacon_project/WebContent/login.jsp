@@ -13,6 +13,12 @@
 <body>
 	<jsp:include page="navbar.jsp"></jsp:include>
 
+	<% 
+		String err = (String) request.getAttribute("LoginErrorMessage"); 
+		if (err != null) {
+			out.println(err); 
+		}
+	%>
 
 	<!-- Main Content -->
 	
