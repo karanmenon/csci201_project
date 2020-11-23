@@ -48,7 +48,7 @@ public class BeaconSignalRequest extends HttpServlet {
 		}
 		
 		else {
-			String username = request.getCookies()[0].getValue();
+			String username = request.getParameter("user_name");
 			Integer userID = db.getUserId(username); 
 			
 			// change this if we have the SubBeacon object already 

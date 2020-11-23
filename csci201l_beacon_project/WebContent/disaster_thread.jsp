@@ -121,6 +121,9 @@ for(int i = 0; cookies != null && i < cookies.length; i++)
 		<div class="modal-content">
 			<div id="modal-content__header">Create New Post</div>
 			<form id="post-form-id" action="BeaconSignalRequest" method="POST">
+			<% if(loggedIn){ %>
+				<input type="hidden" name="user_name" value="<%= loginCookie.getValue() %>">
+			<% } %>
 				<input type="hidden" name="disaster_title" value="<%=threadName%>">
 				<input name="modal_title" class="form-control" type="text" id="post-title-input-id" placeholder="Title/Description">
 				<textarea name="modal_info" class="form-control" id="post-info-input-id" placeholder="Info"></textarea>
