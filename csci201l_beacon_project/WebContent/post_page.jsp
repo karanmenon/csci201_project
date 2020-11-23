@@ -73,6 +73,7 @@ pageEncoding="ISO-8859-1" %>
 			<%} %>
 		</div>
 	<% } %>
+	</div>
 	<!-- PLACEHOLDER - content will be dynamically created -->
 	<!-- <div class="post">
 		<div class="post-username">Posted by: Username</div>
