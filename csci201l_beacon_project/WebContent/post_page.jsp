@@ -58,7 +58,7 @@ pageEncoding="ISO-8859-1" %>
 			{%>
 		<form action="CommentRequest" method="POST" id="comment-form-id">
 			<input name="comment_text" id="comment-input-id" placeholder="Comment">
-			<input type="hidden" name="post_title" value=<%= post.get_postTitle() %>>
+			<input type="hidden" name="post_title" value="<%= post.get_postTitle() %>">
 			<input type="hidden" name="username" value="<%= loginCookie.getValue()%>">
 		</form>
 		<%} %>
