@@ -8,17 +8,15 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 	<title>Beacon</title>
 	<link rel="stylesheet" href="navbar.css">
+	<style>
+	.error {
+		color: red;
+	}
+	</style>
 	
 </head>
 <body>
 	<jsp:include page="navbar.jsp"></jsp:include>
-
-	<% 
-		String err = (String) request.getAttribute("LoginErrorMessage"); 
-		if (err != null) {
-			out.println(err); 
-		}
-	%>
 
 	<!-- Main Content -->
 	
@@ -44,6 +42,10 @@
 						<input type="password" class="form-control" id="password" name="password" required>
 					</div>
 				</div>
+				<% String err = (String) request.getAttribute("LoginErrorMessage"); 
+					if (err != null) { %>
+				<div class="error"><%= err %></div>
+				<% } %>		
 			</div>
 			<div class="col-12 mb-3">
 				<button type="submit" class="btn btn-primary">Log in</button>
