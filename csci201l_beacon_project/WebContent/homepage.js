@@ -66,8 +66,12 @@ $(document).on("change", "#form__categories-id", function(event) {
 	// var selector = "'." + optionSelected.val() + "'";
 	// console.log(selector);
 	// $(".content").find(".Fire").css("display", "flex");
-	$(".content").find("." + optionSelected.val()).css("display", "flex");
-	console.log(optionSelected.val());
+	if (optionSelected.val() == "All") {
+		$(".thread").css("display", "flex");
+	} else {	
+		$(".content").find("." + optionSelected.val()).css("display", "flex");
+		console.log(optionSelected.val());
+	}
 });
 
 // Clicking thread links to thread page
