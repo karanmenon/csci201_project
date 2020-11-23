@@ -60,7 +60,7 @@ public class SignUpRequest extends HttpServlet
 			ArrayList<SubBeacon> subBeacons = db.getSubBeacons(); 
 			request.setAttribute("SubBeacons", subBeacons);
 			
-			RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/homepage.jsp");
+			RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/login.jsp");
 			reqDispatcher.forward(request, response);
 		}
 		
