@@ -10,7 +10,7 @@ CREATE TABLE Users (
 
 CREATE TABLE Disasters (
     disasterID int(15) not null primary key AUTO_INCREMENT,
-    disasterName varchar(30) not null unique,
+    disasterName varchar(60) not null unique,
     disasterType varchar(30) not null
 );
 
