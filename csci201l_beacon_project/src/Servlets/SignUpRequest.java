@@ -51,16 +51,16 @@ public class SignUpRequest extends HttpServlet
 			User user = new User(username, password); 
 			db.addUser(user);
 			
-			System.out.println("username: " + user.get_username()); 
-			System.out.println("password: " + user.get_password()); 
-			
 			Cookie userCookie = new Cookie("username", user.get_username());
 			response.addCookie(userCookie);
 			
 			ArrayList<SubBeacon> subBeacons = db.getSubBeacons(); 
+			if (subBeacons == null) {
+				subBeacons = new ArrayList<SubBeacon>(); 
+			}
 			request.setAttribute("SubBeacons", subBeacons);
 			
-			RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/login.jsp");
+			RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/homepage.jsp");
 			reqDispatcher.forward(request, response);
 		}
 		
