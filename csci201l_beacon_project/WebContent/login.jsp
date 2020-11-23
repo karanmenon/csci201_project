@@ -42,6 +42,9 @@
 			<div class="col-12 mb-3">
 				<button type="submit" class="btn btn-primary">Log in</button>
 			</div>
+			<div class="col-12 mb-3">
+				<button type="button" onclick="location.href = 'signup.jsp';" class="btn btn-secondary">Register</button>
+			</div>
 		</form>
 	</div>
 
