@@ -411,7 +411,7 @@ public class DatabaseDriver {
 			String sql3 = "SELECT postID FROM Posts WHERE postTitle = '" + beaconSignal.get_postTitle() + "'";
 			PreparedStatement pss = connection.prepareStatement(sql3);
 			ResultSet rss = pss.executeQuery();
-			rs.next();
+			rss.next();
 			Integer postID = rss.getInt("postID");
 			beaconSignal.set_postId(postID);
 			
