@@ -54,13 +54,9 @@ public class LoginRequest extends HttpServlet {
 			
 			Cookie userCookie = new Cookie("username", user.get_username());
 			response.addCookie(userCookie);
+
 			
-			// gets array list of subbeacons to send to front end to display after the user has logged in
-			ArrayList<SubBeacon> subBeacons = db.getSubBeacons(); 
-			request.setAttribute("SubBeacons", subBeacons);
-			
-			RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/homepage.jsp");
-			reqDispatcher.forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/homepage.jsp");
 		}
 		
 	}
