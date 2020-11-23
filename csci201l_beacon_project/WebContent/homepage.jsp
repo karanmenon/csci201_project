@@ -3,7 +3,20 @@ pageEncoding="ISO-8859-1" %>
 <%@ page import="ClassStructure.DatabaseDriver" %>
 <%@ page import="ClassStructure.SubBeacon" %>
 <%@ page import="java.util.ArrayList" %>
-
+<% 
+Cookie[] cookies = request.getCookies();
+boolean loggedIn = false;
+Cookie loginCookie = null;
+for(int i = 0; cookies != null && i < cookies.length; i++)
+{
+	Cookie cookie = cookies[i];
+          if(cookies[i].getName().equals("username"))
+          {
+          	loggedIn = true;
+          	loginCookie = cookies[i];
+          }
+}
+%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -35,7 +48,9 @@ pageEncoding="ISO-8859-1" %>
                 <option value="Hurricane">Hurricane</option>
             </select>
 		</form>
+		<%  if(loggedIn){ %>
 		<button type="button" id="report-btn-id" class="btn btn-danger">Report</button>
+		<% } %>
 	</div>
 
 	<div class="content">

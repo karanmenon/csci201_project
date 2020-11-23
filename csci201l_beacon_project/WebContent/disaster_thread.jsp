@@ -4,7 +4,20 @@ pageEncoding="ISO-8859-1" %>
 <%@ page import="ClassStructure.SubBeacon" %>
 <%@ page import="ClassStructure.BeaconSignal" %>
 <%@ page import="java.util.ArrayList" %>
-
+<% 
+Cookie[] cookies = request.getCookies();
+boolean loggedIn = false;
+Cookie loginCookie = null;
+for(int i = 0; cookies != null && i < cookies.length; i++)
+{
+	Cookie cookie = cookies[i];
+          if(cookies[i].getName().equals("username"))
+          {
+          	loggedIn = true;
+          	loginCookie = cookies[i];
+          }
+}
+%>
 <%
 	String threadName = request.getParameter("thread_name");
 	DatabaseDriver driver = new DatabaseDriver();
@@ -35,7 +48,9 @@ pageEncoding="ISO-8859-1" %>
 		<!-- PLACEHOLDER - Retrieve name of disaster thread dynamically -->
 		<div class="filters-and-button">
 			<h1 class="thread-name"><%= threadName %></h1>
+			<%  if(loggedIn){ %>
 			<button type="button" id="report-btn-id" class="btn btn-danger">Create a Post</button>
+			<% } %>
 		</div>
 	</div>
 
