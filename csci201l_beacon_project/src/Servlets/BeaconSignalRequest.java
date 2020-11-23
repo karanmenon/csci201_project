@@ -59,8 +59,10 @@ public class BeaconSignalRequest extends HttpServlet {
 			LocalDate timeStamp = LocalDate.now();
 			ArrayList<Comment> comments = new ArrayList<Comment>(); 
 			
-			BeaconSignal bs = new BeaconSignal(userID, sb, title, postBody, LocalDateTime.now(), comments); 
+			BeaconSignal bs = new BeaconSignal(null, userID, sb, title, postBody, LocalDateTime.now(), comments); 
 			db.addBeaconSignal(bs);
+			bs = db.getBeaconSignal(title);
+			
 			
 			// sends the BeaconSignal object to front end -- contains the "new" beacon signal 
 			request.setAttribute("BeaconSignal", bs);

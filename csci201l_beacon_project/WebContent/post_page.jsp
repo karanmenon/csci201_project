@@ -15,6 +15,10 @@ pageEncoding="ISO-8859-1" %>
 		postID = Integer.parseInt(request.getParameter("post_id"));
 		post = driver.getBeaconSignal(postID);
 	}
+	else if (request.getAttribute("BeaconSignal") != null){
+		post = (BeaconSignal) request.getAttribute("BeaconSignal");
+		postID = post.get_postId();
+	}
 %>
 
 <!DOCTYPE html>
