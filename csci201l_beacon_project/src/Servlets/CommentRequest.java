@@ -37,7 +37,7 @@ public class CommentRequest extends HttpServlet {
 				
 			String comment = request.getParameter("comment_text");
 			System.out.println(comment);
-			String beaconTitle = (String) request.getParameter("beaconSignal");
+			String beaconTitle = request.getParameter("post_title");
 			BeaconSignal bs = db.getBeaconSignal(beaconTitle);
 			String username = (String) request.getParameter("username"); 
 			
