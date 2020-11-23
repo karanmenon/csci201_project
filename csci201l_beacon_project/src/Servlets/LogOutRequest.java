@@ -30,7 +30,9 @@ public class LogOutRequest extends HttpServlet {
 		}
 		
 		// after user logs out, redirected to the home page -- cookie has been removed 
-		response.sendRedirect(request.getContextPath() + "/homepage.jsp");
+		RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/redirect_home.jsp");
+		reqDispatcher.forward(request, response);
+		
 		
 	}
 
