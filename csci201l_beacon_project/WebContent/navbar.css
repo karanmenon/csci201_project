@@ -18,7 +18,7 @@
 	border-radius: 5px;
 	width: 150px;
 	text-align: center;
-	
+	display: none;
 	position: absolute;
 	right: -10px;
 }
@@ -32,17 +32,9 @@
 	background: lightgray;
 }
 
-.user__user-dropdown--logged-in {
-	display: none;
-}
-
 .user-dropdown__username {
 	margin: 10px;
 	color: black;
-}
-
-.user__user-dropdown--logged-out {
-	display: none;
 }
 
 @media (min-width: 768px) {
